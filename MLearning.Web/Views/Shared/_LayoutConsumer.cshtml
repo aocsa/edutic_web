@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html class="ml-parent ml-overflow">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title | MLearning CITEC</title>
+    <link rel="icon" href="@Url.Content("~/images/favicon_64.ico")" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="@Url.Content("~/images/favicon_128.ico")" type="image/x-icon" />
+    <link href="@Url.Content("~/fonts/mlearning/css/font-mlearning.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/consumer2.css")" rel="stylesheet" />
+    <!-- <script id="facebook-jssdk" src="@Url.Content("~/Scripts/sdk.js")"></script>
+    <script src="@Url.Content("~/Scripts/loginFacebook.js")"></script> -->
+</head>
+<body ng-app="mlearningApp" ng-controller='indexCtrl'>
+
+    <div id="loading">
+        <div>
+            <h1 class="ml-icon ml-icon-logo"></h1>
+            <div class="sk-wave">
+                <div class="sk-rect sk-rect1"></div>
+                <div class="sk-rect sk-rect2"></div>
+                <div class="sk-rect sk-rect3"></div>
+                <div class="sk-rect sk-rect4"></div>
+                <div class="sk-rect sk-rect5"></div>
+            </div>
+        </div>
+    </div>
+
+@if (Request.IsAuthenticated) {
+    <script type="text/javascript">
+        document.cookie = "isAuthenticated=true";
+    </script>
+} else {
+    <script type="text/javascript">
+        document.cookie = "isAuthenticated=false";
+    </script>
+}
+    <!-- Menu superior-->
+    <header id="consumer">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <!-- Menu para moviles -->                
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar top-bar"></span>
+                        <span class="icon-bar middle-bar"></span>
+                        <span class="icon-bar bottom-bar"></span>
+                    </button>
+                    <!-- Logo -->                
+                    <a class="navbar-brand logo" href="#/">EDUTICNOW</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <!-- <div id="onboarding-wrapper"> -->
+                    <div id="onboarding-wrapper" class="hidden-xs">
+                        <div>
+                            <div class="navbar-text">Avance de tareas</div>
+                            <div class="progress">
+                                <div class="progress-bar">80%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="ml-avatar-user ml-avatar-xs">
+                                {{user_session_.name}} 
+                                <span class="pull-right">
+                                    <span ng-show="!user_session_.photo">{{user_session_.name | capitalize | limitTo:1}}</span>
+                                    <img ng-show="user_session_.photo" ng-src="{{user_session_.photo ? user_session_.photo : ''}}">
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a title="Mensajes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="ml-icon ml-icon-mensaje"></i></a>
+                            <ul class="dropdown-menu ml-dropdown" role="menu">
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>23$</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>23$</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>23$</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a title="Notificaciones" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="ml-icon ml-icon-campana"></i> <span class="ml-circle">13</span></a>
+                            <ul class="dropdown-menu ml-dropdown" role="menu">
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>23$</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>23$</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="item">
+                                        <span class="item-left">
+                                            <img src="http://lorempixel.com/50/50/" alt="" />
+                                            <span class="item-info">
+                                                <span>Item name</span>
+                                                <span>23$</span>
+                                            </span>
+                                        </span>
+                                        <span class="item-right">
+                                            <button class="btn btn-xs btn-danger pull-right">x</button>
+                                        </span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>@using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                { }<a ng-click="logout()" title="Salir"><i class="glyphicon glyphicon-log-out"></i></a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+    </header>
+
+    <div id="loading_bar" class="loader">
+        <!--div class="green sd0"></div>
+        <div class="red sd05"></div>
+        <div class="blue sd1"></div>
+        <div class="yellow sd15"></div-->
+    </div>
+    
+    <div id="content">
+        <div class="left-sidebar">
+            <div id="ml_menu" class="visible-xs-block"><i class="glyphicon glyphicon-menu-right"></i></div>
+            @using Microsoft.AspNet.Identity
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portada ml-avatar-user ml-avatar-l">              
+                        <span>
+                            <span ng-show="!user_session_.photo">{{user_session_.name | capitalize | limitTo:1}}</span>
+                            <img ng-show="user_session_.photo" ng-src="{{user_session_.photo ? user_session_.photo : ''}}">
+                        </span>
+                        <div class="caption">
+                            {{user_session_.name}}
+                            <span>{{user_session_.role == "Consumer" ? "Estudiante" : user_session_.role}}</span>
+                            <p>Cursos del 2015</p>
+                            <div class="progress">
+                                <div class="progress-bar">60%</div>
+                            </div>
+                        </div>
+                        <a href="#/"><i class="ml-icon ml-icon-casa">&nbsp;&nbsp;</i>{{institution.name}}</a>
+                    </div>
+
+                    <div class="sidebar-content">
+                        <ul class="menu-sidebar">
+                            <li><span><i class="ml-icon ml-icon-curso">&nbsp;&nbsp;</i>Cursos</span>
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="circle in ciclesByUser">
+                                        <span class="badge">14</span>
+                                        <a href="#/circle/{{circle.id}}">Curso: <h4>{{circle.name}}</h4></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="ml-addCourse"><a href="#/addCourses">AGREGAR CURSOS<i class="ml-icon glyphicon glyphicon-plus"></i></a></li>
+                            <li><span><i class="ml-icon ml-icon-tarea">&nbsp;&nbsp;</i>Tareas</span>
+                                <ul class="list-group tareas">
+                                    <li class="list-group-item"><i class="glyphicon glyphicon-menu-hamburger">&nbsp;</i>Ver Tareas</li>
+                                    <li class="list-group-item"><i class="ml-icon ml-icon-pregunta">&nbsp;&nbsp;</i>Hacer un pregunta</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ml_cuerpo_principal" class="container-fluid main-content">
+            <div class="row">
+                <!-- Banner -->
+                <div class="banner">
+                    <div class="col-xs-4 col-md-2">
+                        <div class="img-circle ml-big-icon"><i class="ml-icon {{img_class_title}}"></i></div>
+                    </div>
+                    <div class="col-xs-8 col-md-10">
+                        <h1>{{title}}</h1>
+                        <h4>{{sub_title}}</h4>
+                        <h4>{{sub_title2}}</h4>
+                    </div>
+                </div>
+
+
+                <!-- contenido -->
+                @RenderBody()
+                <div class="box-contenido body-content" ng-view="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="@Url.Content("~/Scripts/angular.js")"></script>
+    <script src="@Url.Content("~/Scripts/angular-resource.js")"></script>
+    <script src="@Url.Content("~/Scripts/angular-route.js")"></script>
+    <script src="@Url.Content("~/Scripts/angular-animate.js")"></script>
+    <script src="@Url.Content("~/Scripts/angular-cookies.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-2.1.4.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <!-- // <script src="@Url.Content("~/Scripts/jquery.bsPhotoGallery.js")"></script> -->
+    <script src="@Url.Content("~/Scripts/componentes/angular-bootstrap/ui-bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/componentes/ng-youtube/ng-youtube-embed.min.js")"></script>
+    <!-- my scripts -->
+    <script src="@Url.Content("~/Scripts/appConsumer/js/scripts.js")"></script>
+    <!-- Routes -->
+    <script src="@Url.Content("~/Scripts/appConsumer/appConsumer.js")"></script>
+    <!-- Services -->
+    <script src="@Url.Content("~/Scripts/appConsumer/services/appServices.js")"></script>
+    <script src="@Url.Content("~/Scripts/appConsumer/services/coursesServices.js")"></script>
+    <script src="@Url.Content("~/Scripts/appConsumer/services/consumerServices.js")"></script>
+    <!-- Controllers -->
+    <script src="@Url.Content("~/Scripts/appConsumer/controllers/consumerCtrl.js")"></script>
+    <script src="@Url.Content("~/Scripts/appConsumer/controllers/addCoursesCtrl.js")"></script>
+    <script src="@Url.Content("~/Scripts/appConsumer/controllers/coursesCtrl.js")"></script>
+    <script src="@Url.Content("~/Scripts/appConsumer/controllers/loCtrl.js")"></script>
+    <script src="@Url.Content("~/Scripts/appConsumer/controllers/quizzesCtrl.js")"></script>
+    <script>
+        $(document).ready(function () {
+            // menu lateral
+            $('#ml_menu').click(function(){
+                $('.left-sidebar').toggleClass('ml-sidebar-off');
+            });
+
+            // seccion de unidades - icono de lista desplegable
+            $('#ml_cuerpo_principal').on('show.bs.collapse','div#accordion div div', function () {
+                var $icono = $($(this)[0]).prev($('div.panel-heading')).find('h4')
+                $icono.find('i').addClass('glyphicon-menu-down');
+            });
+
+            $('#ml_cuerpo_principal').on('hide.bs.collapse','div#accordion div div', function () {
+                var $icono = $($(this)[0]).prev($('div.panel-heading')).find('h4')
+                $icono.find('i').removeClass('glyphicon-menu-down');
+            });
+
+            // sidebar rezise height
+            var a = $(".left-sidebar").height();
+            var b = $(".portada").height();
+            var c = a - b;
+            $(".sidebar-content").height(c);
+        });
+        
+        $(window).resize(function() {
+            // sidebar rezise height
+            var a = $(".left-sidebar").height();
+            var b = $(".portada").height();
+            var c = a - b;
+            $(".sidebar-content").height(c);
+        });
+
+    </script>
+</body>
+</html>

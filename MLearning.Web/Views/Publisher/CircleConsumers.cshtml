@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Alumnos del Circulo: " + ViewBag.CircleName;  
+    ViewBag.VisibleMenus = "[{codigo: 7},{codigo: 8},{codigo: 9}]";
+    ViewBag.ActiveRole = "Profesor";
+}
+
+<div class="content-box">
+
+    <!-- Tabla -->
+    @(Html.Kendo().Grid<MLearningDB.consumer_by_circle>()
+    .Name("grid-table")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.id).HeaderTemplate("Id").Width(70).Filterable(false);
+        columns.Bound(c => c.fullname).HeaderTemplate("Nombre").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+        columns.Bound(c => c.email).HeaderTemplate("Email").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+        columns.Bound(c => c.username).HeaderTemplate("Usuario").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+
+        columns.Template(c => { }).ClientTemplate(
+           @Html.ActionLink("<img src=../../images/calificaciones.png>", "-", new { id = "#=id#" }, new { @class = "btn-icon", @title = "Unidades" }).ToHtmlString()
+       ).HeaderTemplate("Acciones");
+    })
+
+    .Pageable(pager => pager.Messages(messages => messages.Display("{0} - {1} de {2} elementos")))
+    .Sortable(s => s.Enabled(true))
+    .Scrollable(s => s.Enabled(false)) 
+    .ToolBar(toolbar =>
+               {
+               toolbar.Template("<div class='nav-tab'><div class='row'>" +
+                "<ul><li>" + @ViewBag.institution.name + "</li><li> Alumnos del círculo " + ViewBag.CircleName + "</li></ul>" +
+                 "</div></div>");
+              })
+    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(8)
+
+        .Events(events => events.Error("error_handler"))
+        .Model(model =>
+        {
+            model.Id(c => c.id);
+            model.Field(c => c.id).Editable(false);
+            model.Field(c => c.created_at).Editable(false);
+            model.Field(c => c.updated_at).Editable(false);
+        })
+        .Read(read => read.Action("CircleConsumers_read", "Publisher"))
+    )
+    )
+
+    <!-- Botones de inforrmacion-->
+    <ul class="buttons-details">
+        <li><img src="../../images/calificaciones.png">Calificaciones</li>
+    </ul>
+</div>

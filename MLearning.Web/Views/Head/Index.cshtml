@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    ViewBag.VisibleMenus = "[{codigo: 3},{codigo: 4},{codigo: 5},{codigo: 6}]";
+    ViewBag.ActiveRole = "Director";
+    ViewBag.menu = 3;
+}
+
+<div class="content-box">
+    <div class="boxes">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="box teacher pull-right">
+                        <div class="borde" ng-click="redireccionar('@Url.Action("Publishers")')">
+                            <img src="../../images/profesor_ico.png"> Profesores
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 center">
+                    <div class="box students">
+                        <div class="borde" ng-click="redireccionar('@Url.Action("Consumers")')">
+                            <img src="../../images/alumno-ico.png"> Alumnos
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="box circles">
+                        <div class="borde" ng-click="redireccionar('@Url.Action("Circles")')">
+                            <img src="../../images/circulo-ico.png"> Círculos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

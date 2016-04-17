@@ -1,0 +1,270 @@
+﻿@{
+    ViewBag.Title = "Publishers";
+    ViewBag.VisibleMenus = "[{codigo: 3},{codigo: 4},{codigo: 5},{codigo: 6}]";
+    ViewBag.ActiveRole = "Director";
+    ViewBag.menu = 4;
+}
+
+<div class="content-box">
+
+    @(Html.Kendo().Grid<MLearning.Core.Entities.publisher_by_institution>()
+    .Name("grid-table")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.id).HeaderTemplate("Id").Width(70);
+        columns.Bound(c => c.fullname).HeaderTemplate("Nombre");
+        columns.Bound(c => c.email).HeaderTemplate("Email");
+        columns.Bound(c => c.country).HeaderTemplate("Pais");
+        columns.Command(command =>
+        {
+            command.Custom("Ver").Click("showDetails").HtmlAttributes(new { @title = "Ver" });
+            command.Edit().UpdateText("Guardar").CancelText("Cancelar").Text(" ").HtmlAttributes(new { @title = "Editar" });
+           // command.Destroy().HtmlAttributes(new { @title = "Eliminar" });
+            command.Custom("delet").Click("eliminarPublisher").HtmlAttributes(new { @title = "Eliminar" });
+            
+        }).HeaderTemplate("Acciones");
+    })
+
+   .Pageable(pager =>
+      {
+         pager.Messages(messages => messages.Display("{0} - {1} de {2} elementos"));
+         pager.ButtonCount(7);
+     })
+            
+    .Sortable(s => s.Enabled(true))
+    .Scrollable(s => s.Enabled(false))
+            .ToolBar(toolbar =>
+                {
+                    toolbar.Template("<div class='nav-tab'><div class='row'>" +
+                        "<div class='col-md-8'><ul><li>"+ @ViewBag.institution.name +"</li>" +"<li>Profesores</li></ul></div>" +
+                        "<div class='col-md-4'><div class='pull-right'><a class='k-grid-add btn btn-blue' href='/Head/Publisher_read?grid-table-mode=insert'>Nuevo</a>" +
+                        "</div></div>" +
+                        "</div></div>");
+                })
+            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("Publisher").Window(w => w.Title("Editar profesor").Name("editwindow")))
+       .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(20)
+
+        .Events(events => events
+          .Error("error_handler")
+          .RequestEnd("onRequestEnd")
+        )
+                 
+        .Model(model =>
+        {
+            model.Id(c => c.id);
+            model.Field(c => c.id).Editable(false);
+            model.Field(c => c.created_at).Editable(false);
+            model.Field(c => c.updated_at).Editable(false);
+        })
+        .Create(update => update.Action("Publisher_Create", "Head"))
+        .Read(read => read.Action("Publisher_read", "Head"/*, new { institutionId = ViewBag.InstitutionId}*/))
+        .Update(update => update.Action("Publisher_Update", "Head"))
+        .Destroy(update => update.Action("Publisher_Destroy", "Head"))
+    )
+    
+     .Events(events => events.Edit("onEdit"))
+     
+    )
+
+    <!-- Botones de inforrmacion-->
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="buttons-details">
+                <li><img src="@Url.Content("~/images/visualizar.png")">Visualizar</li>
+                <li><img src="@Url.Content("~/images/editar.png")">Editar</li>
+                <li><img src="@Url.Content("~/images/eliminar.png")">Eliminar</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+@(Html.Kendo().Window().Name("DetailsPublisher")
+    .Title("Información del profesor")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(420)
+)
+
+<!-- Ventana modal eliminar Publisher-->
+@(Html.Kendo().Window().Name("eliminarPublisher")
+    .Title("")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(400)
+)
+
+<script type="text/x-kendo-template" id="template">
+    <div id="details-container">
+        <div class="modal-body form-horizontal">
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Nombres</label>
+                <div class="col-md-9">
+                    <span>#=name #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Apellidos</label>
+                <div class="col-md-9">
+                    <span>#=lastname #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">País</label>
+                <div class="col-md-9">
+                    <span>#=country #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Región/Estado</label>
+                <div class="col-md-9">
+                    <span>#=region #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Ciudad</label>
+                <div class="col-md-9">
+                    <span>#=city #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Teléfono</label>
+                <div class="col-md-9">
+                    <span>#=telephone #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Email</label>
+                <div class="col-md-9">
+                    <span>#=email #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Usuario</label>
+                <div class="col-md-9">
+                    <span>#=username #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Contraseña</label>
+                <div class="col-md-9">
+                    <span>#=password #</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer btn-actions">
+            <button class="btn btn-blue" id="CancelPublisher"> Cancelar</button>
+        </div>
+
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="template-delet">
+
+    <div id="details-container">
+        <div class="modal-body">
+            <span>Está seguro que desea eliminar al docente</span>
+        </div>
+
+        <div class="modal-footer btn-actions">
+            <button class="btn btn-blue" id="yesButton">Si</button>
+            <button class="btn btn-blue" id="noButton"> No</button>
+        </div>
+    </div>
+
+</script>
+
+
+<script type="text/javascript">
+
+    function onRequestEnd(e) {
+        if (e.type === "update") {
+            if (!e.response.Errors) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("La información se actualizó correctamente", "Operación Exitosa");
+            }
+        }
+        if (e.type == "create") {
+            if (!e.response.Errors) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("La información se guardó correctamente.", "Operación Exitosa");
+            }
+        }
+        if (e.type == "destroy") {
+            if (!e.response.Errors) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("El registro se eliminó correctamente.", "Operación Exitosa");
+            }
+        }
+
+        console.log(e);
+    }
+
+    function onEdit(e) {
+
+        setTimeout(function () {
+            $("#institutionName").attr("value", "@ViewBag.institution.name");
+        }, 200);
+
+        if (e.model.isNew()) {
+            //cambiar titulos
+            e.container.data("kendoWindow").title("Nuevo profesor");
+
+        }
+        else {
+            e.container.data("kendoWindow").title("Editar profesor");
+        }
+        e.preventDefault();
+    }
+
+
+    function showDetails(e) {
+        e.preventDefault();
+        var detailsTemplate = kendo.template($("#template").html());
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#DetailsPublisher").data("kendoWindow");
+
+        wnd.content(detailsTemplate(dataItem));
+        wnd.center().open();
+
+        //button cancelar
+        $("#CancelPublisher").click(function () {
+            wnd.close();
+        })
+    }
+
+    function eliminarPublisher(e) {
+
+        var deleteTemplate = kendo.template($("#template-delet").html());
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#eliminarPublisher").data("kendoWindow");
+        wnd.content(deleteTemplate(dataItem));
+        wnd.center().open();
+
+        var grid = $("#grid-table").data("kendoGrid");
+
+        //Agregando clase
+        $("#eliminarPublisher").parent().addClass("delete");
+
+
+        $("#yesButton").click(function () {
+            grid.dataSource.remove(dataItem)
+            grid.dataSource.sync()
+            wnd.close();
+        })
+
+        $("#noButton").click(function () {
+            wnd.close();
+        })
+
+    }
+</script>
+
+

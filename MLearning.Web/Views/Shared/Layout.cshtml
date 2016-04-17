@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title | MLearning CITEC</title>
+    <link rel="icon" href="@Url.Content("~/images/favicon_64.ico")" type="image/x-icon" />
+    <link rel="shortcut icon" href="@Url.Content("~/images/favicon_128.ico")" type="image/x-icon" />
+    <link href="@Url.Content("~/Content/medium-editor.css")" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendo")
+    @Styles.Render("~/Content/toastr")
+    @Styles.Render("~/Content/app")
+
+    <!--Scripts.Render("~/bundles/modernizr")-->
+    @RenderSection("styles", required: false)
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    <!--Scripts.Render("~/bundles/jquery")-->
+    @{
+        var culture = System.Globalization.CultureInfo.CurrentCulture.ToString();
+    }
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/toastr")
+    
+    <script src="@Url.Content("~/Scripts/componentes/ng-draggable/ngDraggable.js")"></script>
+    <script src="@Url.Content("~/Scripts/medium-editor.js")"></script>
+    <script src="@Url.Content("http://cdn.kendostatic.com/2015.1.429/js/cultures/kendo.culture." + culture + ".min.js")"></script>
+    <script src="@Url.Content("~/Scripts/commons.js")"></script>
+    <script type="text/javascript">
+        kendo.culture("@culture");
+    </script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.429/jszip.min.js")"></script>
+</head>
+
+<body ng-app="mlearningApp" ng-controller='indexCtrl'>
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+
+
+    <header>
+        <!-- menu principal -->
+        <nav class="navbar">
+            <div class="container-navbar">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-superior" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="/images/logo-ed.png">
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="main-superior" ng-init="@if(ViewBag.VisibleMenus != null){  @("items = " + ViewBag.VisibleMenus) }">
+                    <ul class="nav navbar-nav navbar-left" ng-repeat="item in items track by $index" ng-switch on="item.codigo">
+                        <li @{if (ViewBag.menu == 0) { <text> class="active" </text>   }} ng-switch-when="0" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("/","Admin")')"><span class="ml-icon ml-icon-casa"></span> Inicio</a>
+                        </li>
+                        <li @{if (ViewBag.menu == 1) { <text> class="active" </text>    }} ng-switch-when="1" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("Institutions","Admin")')"><span class="ml-icon ml-icon-institucion"></span> Instituciones</a>
+                        </li>
+                        <li @{if (ViewBag.menu == 2) { <text> class="active" </text>    }} ng-switch-when="2" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("LearningObjects","Admin")')"><span class="ml-icon ml-icon-unidad"></span> Unidades</a>
+                        </li>
+
+                        <li @{if (ViewBag.menu == 3) { <text> class="active" </text>     }} ng-switch-when="3" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("/","Head")')"><span class="ml-icon ml-icon-casa"></span> Inicio</a>
+                        </li>
+
+                        <li @{if (ViewBag.menu == 4) { <text> class="active" </text>     }} ng-switch-when="4" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("Publishers", "Head")')"><span class="ml-icon ml-icon-asig-profe"></span> Profesores</a>
+                        </li>
+
+                        <li @{if (ViewBag.menu == 5) { <text> class="active" </text>     }} ng-switch-when="5" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("Consumers", "Head")')"><span class="ml-icon ml-icon-alumno"></span> Alumnos</a>
+                        </li>
+
+                        <li @{if (ViewBag.menu == 6) { <text> class="active" </text>    }} ng-switch-when="6" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("Circles","Head")')"><span class="ml-icon ml-icon-circle"></span> Círculos</a>
+                        </li>
+                        <li @{if (ViewBag.menu == 7) { <text> class="active" </text>   }} ng-switch-when="7" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("/", "Publisher")')"><span class="ml-icon ml-icon-casa"></span> Inicio</a>
+                        </li>
+                        <li @{if (ViewBag.menu == 8) { <text> class="active" </text>    }} ng-switch-when="8" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("/", "Publisher")')"><span class="ml-icon ml-icon-institucion"></span> Instituciones</a>
+                        </li>
+                        <li @{if (ViewBag.menu == 9) { <text> class="active" </text>    }} ng-switch-when="9" ng-cloak ng-show="showMenu">
+                            <a href="" ng-click="redireccionar('@Url.Action("/", "Publisher")')"><span class="ml-icon ml-icon-unidad"></span> Unidades</a>
+                        </li>
+
+                    </ul>
+                    <div class="navbar-right">
+                        <form class="navbar-form">
+                            <div class="form-group">
+                                <input type="text">
+                            </div>
+                        </form>
+
+                        @using Microsoft.AspNet.Identity
+                        <!-- Login -->
+                        @if (Request.IsAuthenticated)
+                        {
+                            <ul class="nav-right">
+                                <li class="perfil">
+
+                                    <img src="/images/imagen_perfil.png">
+                                   <!-- <span class="role-user">@ViewBag.ActiveRole</span> cambiar aqui--> 
+                                    @(User.Identity.GetUserName())
+                                </li>
+                                <li>
+                                     <span ng-click="openProfile()" class="ml-icon ml-icon-perfil"></span>
+                                </li>
+                                @using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm" }))
+                                { }
+                                <li><span ng-click="logout()" class="ml-icon ml-icon-logout"></span></li>
+                            </ul>
+                        }
+                        <!-- Login -->
+                    </div>
+                </div><!-- navbar-collapse -->
+
+            </div><!-- container -->
+        </nav>
+        <!-- menu principal -->
+    </header>
+
+    <!-- contenido de la pagina -->
+    <div id="loading-container">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
+    <div class="box-contenido">
+        <div class="container">
+            @RenderBody()
+            <!--<div class="" ng-view=""> </div>-->
+        </div>
+    </div>
+
+    <!-- pie de pagina -->
+    <footer>
+        <div class="container">
+            <div class="row pie">
+                <div class="col-md-12">
+                    <ul class="socials">
+                        <li><a href="#"><img src="/images/facebook.png"></a></li>
+                        <li><a href="#"><img src="/images/twitter.png"></a></li>
+                        <li><a href="#"><img src="/images/in.png"></a></li>
+                    </ul>
+                    @DateTime.Now.Year EDuTic Inc.  <a href="http://citec.unsa.edu.pe/" target="_blank">info@mlearning.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    @(Html.Kendo().Window().Name("modalWindow")
+    .Title("Perfil de administrador")
+    .Visible(false)
+    .Modal(true)
+    .LoadContentFrom(Url.Action("editUser", "Home"))
+    .Draggable(true)
+    .Width(460))
+
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
+
+    @Html.Partial("_Toastr")
+
+  
+</body>
+
+
+
+</html>

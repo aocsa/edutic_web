@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "Alumnos del Circulo: " + ViewBag.CircleName;
+    ViewBag.VisibleMenus = "[{codigo: 3},{codigo: 4},{codigo: 5},{codigo: 6}]";
+    ViewBag.ActiveRole = "Director";
+}
+
+
+<div class="content-box">
+
+    @(Html.Kendo().Grid<MLearningDB.consumer_by_circle>()
+    .Name("grid-table")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.id).HeaderTemplate("Id").Width(70).Filterable(false); ;
+        columns.Bound(c => c.fullname).HeaderTemplate("Nombre").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+        columns.Bound(c => c.email).HeaderTemplate("Email").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))); ;
+        columns.Bound(c => c.username).HeaderTemplate("Usuario").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false)));
+
+        columns.Command(command =>
+        {
+           //command.Destroy().HtmlAttributes(new { @title = "Quitar", @class = "quitar" });
+           command.Custom("delet").Click("eliminarCircleConsumer").HtmlAttributes(new { @title = "Quitar", @class = "quitar" });
+            
+        }).Width(100).HeaderTemplate("Acciones");
+
+    })
+
+    .ToolBar(toolbar =>
+    {
+        toolbar.Template("<div class='nav-tab'><div class='row'>" +
+        "<div class='col-md-8'><ul><li>" + @ViewBag.institution.name + "</li>" +
+        "<li>Alumnos del círculo " + @ViewBag.CircleName + "</li>" +
+        "</ul></div>" +
+        "<div class='col-md-4'><div class='pull-right'><a class='btn btn-blue' onClick = 'selectConsumer();' href='#'>Nuevo</a>" +
+         "</div></div>" +
+         "</div></div>");
+    })
+
+     .Pageable(pager =>
+      {
+          pager.Messages(messages => messages.Display("{0} - {1} de {2} elementos"));
+          pager.ButtonCount(7);
+      })
+
+    .Sortable(s => s.Enabled(true))
+    .Scrollable(s => s.Enabled(false))
+    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(7)
+
+        .Events(events => events
+            .Error("error_handler")
+            .RequestEnd("onRequestEnd")
+        )
+                 
+        .Model(model =>
+        {
+            model.Id(c => c.id);
+            model.Field(c => c.id).Editable(false);
+            model.Field(c => c.created_at).Editable(false);
+            model.Field(c => c.updated_at).Editable(false);
+        })
+            .Read(read => read.Action("CircleConsumers_read", "Head"))
+            .Destroy(update => update.Action("CircleConsumer_destroy", "Head"))
+    )
+    )
+
+</div>
+
+
+<!--Ventana modal-->
+@(Html.Kendo().Window().Name("selectConsumer")
+    .Title("Seleccionar alumnos")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(450)
+)
+
+<!-- Ventana modal eliminar circle-->
+@(Html.Kendo().Window().Name("eliminarCircleConsumer")
+    .Title("")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(400)
+)
+
+<!--Template-->
+<script type="text/x-kendo-template" id="template">
+    <div class="listConsumer">
+        <div class="modal-body form-horizontal">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <select id="consumerId" multiple="multiple"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer btn-actions">
+
+            <a href="javascript:saveListConsumer();" class="btn btn-blue">Aceptar</a>
+            <a href="javascript:CancelListConsumer();" class="btn btn-blue">Cancelar</a>
+
+        </div>
+
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="template-delet">
+    <div id="details-container">
+        <div class="modal-body">
+            <span>Está seguro que desea quitar al alumno del círculo</span>
+        </div>
+
+        <div class="modal-footer btn-actions">
+            <button class="btn btn-blue" id="yesButton">Si</button>
+            <button class="btn btn-blue" id="noButton"> No</button>
+        </div>
+    </div>
+</script>
+
+<script>
+    function onRequestEnd(e) {
+        if (e.type == "destroy") {
+            if (!e.response.Errors) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("El estudiante se quitó del círculo.", "Operación Exitosa");
+            }
+        }
+
+        console.log(e);
+    }
+
+    function selectConsumer(e) {
+        var detailsTemplate = kendo.template($("#template").html());
+        var wnd = $("#selectConsumer").data("kendoWindow");
+        var url = '@Url.Action("GetConsumerList", "Head")';
+
+        var success = function (result) {
+            if (result != null) {
+                $("#consumerId").kendoMultiSelect({
+                    dataTextField: "fullname",
+                    dataValueField: "id",
+                    dataSource: new kendo.data.DataSource({ data: result })
+                });
+            }
+        };
+
+        $.ajax({ url: url, success: success });
+        wnd.content(detailsTemplate(""));
+        wnd.center().open();
+
+    }
+
+    function CancelListConsumer() {
+        $('#selectConsumer').data("kendoWindow").close();
+    }
+
+    function saveListConsumer() {
+        var consumers = $("#consumerId").data("kendoMultiSelect");
+
+        var postData = {
+            ids : consumers.value(),
+            circleId : @(ViewBag.circleId),
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AddConsumers","Head")",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(postData),
+            success: function (data) {
+                $('#grid-table').data('kendoGrid').dataSource.read();
+                consumers.value(null);
+                $('#selectConsumer').data("kendoWindow").close();
+
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("El estudiante se agregó al círculo.", "Operación Exitosa");
+            },
+            failure: function (errMsg) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.error("Hubo un problema al guardar la información " +errMsg , "Error");
+            }
+        });
+
+    }
+
+    function eliminarCircleConsumer(e) {
+        var deleteTemplate = kendo.template($("#template-delet").html());
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#eliminarCircleConsumer").data("kendoWindow");
+        wnd.content(deleteTemplate(dataItem));
+        wnd.center().open();
+
+        var grid = $("#grid-table").data("kendoGrid");
+
+        //Agregando clase
+        $("#eliminarCircleConsumer").parent().addClass("delete");
+
+        $("#yesButton").click(function () {
+            grid.dataSource.remove(dataItem)
+            grid.dataSource.sync()
+            wnd.close();
+        })
+
+        $("#noButton").click(function () {
+            wnd.close();
+        })
+    }
+
+
+</script>
+
+

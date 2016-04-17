@@ -1,0 +1,54 @@
+<div id="conte_slide">
+    <!-- <div ng-repeat="slide in loslide track by $index"  ng-switch on="slide.lotype" class='animate-list' ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)" ng-drag="true" ng-drag-data="slide"> -->
+    <div ng-repeat="slide in loslide track by $index"  ng-switch on="slide.lotype" class='animate-list'>
+        <pg-slide ng-switch-when='0' tipo="cero" ng-init="editText('cero_tex'+$index)"></pg-slide>
+        <pg-slide ng-switch-when='1' tipo="primero" ng-init="editText('primero_tex'+$index)"></pg-slide>
+        <pg-slide ng-switch-when='2' tipo="segundo" ng-init="editText('segundo_tex'+$index)"></pg-slide>
+        <pg-slide ng-switch-when='3' tipo="tercero" ng-init="editText('tercero_tex'+$index)"></pg-slide>
+        <pg-slide ng-switch-when='4' tipo="cuarto" ng-init="editText('cuarto_tex'+$index)"></pg-slide>
+        <pg-slide ng-switch-when='5' tipo="quinto" ng-init="editText('quinto_tex'+$index)"></pg-slide>
+        <pg-slide ng-switch-when='6' tipo="sexto" ng-init="editText('sexto_tex'+$index)"></pg-slide>
+        <pg-slide ng-switch-when='7' tipo="septimo" ng-init="editText('septimo_tex'+$index)"></pg-slide>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="buttons">
+        <a ng-click="addPagina({lotype:1})">
+            <img src="/images/036_btn_tex_e_imag.png">
+        </a>
+        <a ng-click="addPagina({lotype:2})">
+            <img src="/images/037_btn_tex.png">
+        </a>
+        <a ng-click="addPagina({lotype:3})">
+            <img src="/images/038_btn_list.png">
+        </a>
+        <a ng-click="addPagina({lotype:4, loitemize:{loitem:[]}})">
+            <img src="/images/039_btn_column.png">
+        </a>
+        <a ng-click="addPagina({lotype:5})">
+            <img src="/images/040_btn_quote.png">
+        </a>
+        <a ng-click="addPagina({lotype:6, width: 0, height: 0})">
+            <img src="/images/041_btn_image.png">
+        </a>
+        <a ng-click="addPagina({lotype:7})">
+            <img src="/images/042_btn_video.png">
+        </a>
+
+    </div>
+
+</div>
+
+<div class="row" >
+    <div class="acciones pull-right">
+        <!--a ng-click="guardarPagina()" href="#" class="btn btn-blue">Guardar</a-->
+        <button id="savePage" type="button" ng-click="guardarPagina()" class="btn btn-blue">Guardar</button>
+        <a ng-click="cancelarPagina()" href="#" class="btn btn-blue">Volver</a>
+    </div>
+</div>
+
+
+
+
+

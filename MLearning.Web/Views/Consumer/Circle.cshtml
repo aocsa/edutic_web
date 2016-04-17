@@ -1,0 +1,43 @@
+﻿<!-- Menu secundario-->
+<div class="ml-menu-secundario">
+    <ul class="nav nav-pills btn-sm col-md-9">
+        <li role="presentation" class="active"><a href="#/circle/{{idCircle}}/comments">Comentarios</a></li>
+        <li role="presentation"><a href="#/circle/{{idCircle}}/learningobjects">Unidades</a></li>
+        <li role="presentation"><a href="#/circle/{{idCircle}}/quizzes">Tareas</a></li>
+    </ul>
+</div>
+<div class="container-fluid">
+    <!--Comments-->
+    <div class="row">
+        <div id="ml_contenido" class="col-md-9 ml-comentarios">
+
+            <div class="form-group">
+                <textarea ng-model="comment.text" name="text" id="text" placeholder="Write something..."></textarea>
+                <button type="button" class="btn btn-primary btn-sm ml-botton" ng-click="addPost()">Post</button>
+            </div>
+
+            <div>
+                <ul class="chat ml-avatar-user ml-avatar-m">
+                    <li ng-repeat="post in postsByCircle | orderBy : '-created_at'" class="left clearfix ml-avatar-img">
+                        <span class="chat-img pull-left">
+                            <span ng-show="!post.image_url">{{post.name | capitalize | limitTo:1}}</span>
+                            <img ng-show="post.image_url" ng-src="{{post.image_url ? post.image_url : ''}}" alt="Avatar" class="" />
+                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">{{post.name | capitalize}} {{post.lastname | capitalize }}</strong> <small class="pull-right text-muted">
+                                    <span class="glyphicon glyphicon-time"></span>{{post.created_at | formatterDate1}}</small>
+                            </div>
+                            <p>{{post.text}}</p>
+                        </div>
+                    </li>                        
+                </ul>
+            </div>
+        </div>
+
+        
+        <!-- Comentarios y Actividades -->
+        <page-contact></page-contact>
+
+    </div>
+</div>

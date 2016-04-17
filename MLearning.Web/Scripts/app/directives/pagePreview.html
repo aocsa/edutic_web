@@ -1,0 +1,128 @@
+﻿<div class="page-preview">
+    <div class="row">
+        <div class="col-md-8">
+            <h2><a ng-href="/Page/Index/{{page.id}}">{{page.title}}</a></h2>
+            <p ng-bind-html="trustedHtml(page.description)"></p>
+        </div>
+        <div class="col-md-3">
+            <a ng-href="/Page/Index/{{page.id}}">
+                <img id="coverImage" src="/images/029_icon_imagen.png" ng-src="{{ page.url_img }}" class="img-responsive img-thumbnail" />
+            </a>
+        </div>
+
+            <!-- Seccion 0 >
+            <section ng-if="page.datos.lotype == 0" class="ml-page-kind-0">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.datos.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-7 ml-left-text"><p>{{page.datos.loparagraph}}</p></div>
+                        <div class="col-md-5 ml-right-img">
+                            <img ng-src="{{page.datos.loimage}}">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seccion 1 >
+            <section ng-if="page.datos.lotype == 1" class="ml-page-kind-1">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-7 ml-left-text"><p>{{page.datos.loparagraph}}</p></div>
+                        <div class="col-md-5 ml-right-img">
+                            <img ng-src="{{page.datos.loimage}}">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seccion 2 >
+            <section ng-if="page.datos.lotype == 2" class="ml-page-kind-2">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-12 ml-left-text"><p>{{page.datos.loparagraph}}</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seccion 3 >
+            <section ng-if="page.datos.lotype == 3" class="ml-page-kind-3">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-12 ml-left-text">
+                            <ul>
+                                <li ng-repeat="fig in page.datos.loitemize.loitem">
+                                    <p>{{fig.description}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seccion 4 >
+            <section ng-if="page.datos.lotype == 4" class="ml-page-kind-4">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-12 ml-left-text">
+                            <ul>
+                                <li ng-repeat="fig in page.datos.loitemize.loitem">
+                                    <img ng-src="{{fig.loimage}}">
+                                    <p>{{fig.lotext}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seccion 5 >
+            <section ng-if="page.datos.lotype == 5" class="ml-page-kind-5">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-7 ml-left-text"><p>{{page.datos.lotext}}</p></div>
+                        <div class="col-md-5 ml-right-img">
+                            <img ng-src="{{page.datos.loimage}}">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seccion 6 >
+            <section ng-if="page.datos.lotype == 6" class="ml-page-kind-6">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-7 ml-left-text"><p>{{page.datos.loparagraph}}</p></div>
+                        <div class="col-md-5 ml-right-img">
+                            <img ng-src="{{page.datos.loimage}}">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seccion 7 >
+            <section ng-if="page.datos.lotype == 7" class="ml-page-kind-6">
+                <div class="container-fluid">
+                    <h2 class="ml-title"><a ng-href="/Page/Update/{{page.id}}">{{page.datos.lotitle}}</a></h2>
+                    <div class="row">
+                        <div class="col-md-7 ml-left-text"><p>{{page.datos.loparagraph}}</p></div>
+                        <div class="col-md-5 ml-right-img">
+                            <!-- <iframe width="420" height="315" src="{{page.datos.lovideo}}" frameborder="0" allowfullscreen></iframe> >
+                        </div>
+                    </div>
+                </div>
+            </section-->
+        
+
+        <div class="col-md-1">
+            <a href="" ng-click="removePage($index, section, page)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+</div>

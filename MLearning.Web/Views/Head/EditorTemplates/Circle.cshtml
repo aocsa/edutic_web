@@ -1,0 +1,118 @@
+﻿@model MLearning.Core.Entities.circle_by_owner
+@using  MLearning.Core.Configuration
+@{
+    var attributes = new Dictionary<string, object>();
+    attributes.Add("role", "form");
+    attributes.Add("id", "modalForm");
+    attributes.Add("class", "form-horizontal");
+    
+    var comboattr = new Dictionary<string, object>();
+    comboattr.Add("data-value-primitive", true);
+    comboattr.Add("required", true);
+    comboattr.Add("validationmessage", "Seleccione el docente");
+}
+
+@using (Html.BeginForm("Circle_create", "Head", FormMethod.Post, attributes))
+{
+    
+    @Html.AntiForgeryToken()
+    
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.institution_id)
+    /*@Html.HiddenFor(model => model.created_at)
+    @Html.HiddenFor(model => model.updated_at)*/
+
+    <fieldset>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="code">Código <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.code, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese el código" })
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="name">Nombre <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.name, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese el nombre del circulo" })
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+                <label class="radio-inline">@Html.RadioButtonFor(model => model.type, (int)CircleType.Public) Público</label>
+                <label class="radio-inline">@Html.RadioButtonFor(model => model.type, (int)CircleType.Private) Privado</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="owner_id">Profesor <span class="asterisk">*</span></label>
+
+            <div class="col-md-9">
+                @(Html.Kendo().ComboBoxFor(model => model.owner_id)
+        //.Name("owner_id")
+          .DataTextField("fullname")
+          .DataValueField("id")
+          .HtmlAttributes(new { style = "width:250px" })
+          .Filter("contains")
+          .Placeholder("Selecione profesor...")
+          .IgnoreCase(true)
+        .AutoBind(false)
+          .MinLength(3)
+        .HtmlAttributes(comboattr)
+          .DataSource(source =>
+          {
+              //source.Read(read =>
+              //{
+              //    read.Action("Publisher_read", "Head").Type(HttpVerbs.Post);
+              //})
+              //.ServerFiltering(true);
+
+              source.Custom()
+             .ServerFiltering(true)
+             .Type("aspnetmvc-ajax")
+             .Transport(transport =>
+             {
+                 transport.Read("Publisher_read", "Head");
+             })
+
+             .Schema(schema =>
+             {
+                 schema.Data("Data")
+                       .Total("Total");
+             });
+          })
+                )
+            </div>
+         </div>
+            <!--(Html.Kendo().AutoCompleteFor(model => model.owner_id)
+              .Name("publisher")
+              .DataTextField("ProductName")
+              .DataValueField("ProductID")
+              .Filter("contains")
+              .MinLength(3)
+              .HtmlAttributes(new { style = "width:250px" })
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetInstitutionPublishers", "Head")
+                          .Data("onAdditionalData").Type(HttpVerbs.Post);
+                  })
+                  .ServerFiltering(true);
+              })
+            )-->
+
+    </fieldset>
+}
+
+<script>
+    function onAdditionalData() {
+        return {
+            text: $("#publisher").val()
+        };
+    }
+</script>

@@ -1,0 +1,200 @@
+﻿@model MLearningDB.LearningObject
+
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "Nueva Unidad";
+    ViewBag.VisibleMenus = "[{codigo: 7},{codigo: 8},{codigo: 9}]";
+    ViewBag.ActiveRole = "Profesor";
+    ViewBag.menu = 9;
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/app/unidad/unidadController.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/unidad/unidadService.js")"></script>
+    <script>
+        var LOtagsIds = @Html.Raw(JsonConvert.SerializeObject(ViewBag.tagList));
+        var circleID = @ViewBag.CircleID;
+        var currentLO = @Html.Raw(JsonConvert.SerializeObject(Model));
+    </script>
+}
+<div class="content-box" ng-controller="unidadController">
+
+    @using (Html.BeginForm("CreateLO", "Publisher", FormMethod.Post, new { enctype = "multipart/form-data", id = "unitForm", name = "unitForm", ng_submit = "asdf" }))
+    {
+
+        <div class="nav-tab">
+            {{message}} unidad
+        </div>
+
+        <div class="well ml-section">
+            <div class="row">
+                <div class="col-md-7">
+
+                    <div class="form-group" ng-class="{'has-error':unitForm.loTitle.$invalid && !unitForm.$pristine, 'has-success':unitForm.loTitle.$valid}">
+                        <label for="loTitle"> Título de la Unidad <span class="asterisk">*</span></label>
+                        <input name="loTitle" ng-model="unidadActual.title" class="form-control" type="text" required="required" />
+                        <span class="help-block" ng-show="unitForm.loTitle.$dirty && unitForm.loTitle.$invalid">Por favor ingrese el título</span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-2">Tipo <span class="asterisk">*</span></label>
+                        <div class="col-md-10">
+                            <label class="radio-uni">
+                                <small>Público</small> <input type="radio" ng-model='unidadActual.type' value="@((int)MLearning.Core.Configuration.LOType.Public)">
+                            </label>
+                            <label class="radio-uni">
+                                <small>Privado </small><input type="radio" checked ng-model='unidadActual.type' value="@((int)MLearning.Core.Configuration.LOType.Private)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!--ocultando los tags-->
+                    <!--<div class="form-group">
+                        <label for="nombre" class="col-md-2"> Etiqueta</label>
+                        <div class="col-md-10">
+                            @*<select class="form-control" ng-model="unidadActual.etiqueta" ng-options="etiqueta.name for etiqueta in etiquetas track by etiqueta.id"></select>*@
+                           <select id="loTags" kendo-multi-select
+                                    k-ng-model="unidadActual.tags"
+                                    k-data-text-field="'name'"
+                                    k-data-value-field="'id'"
+                                    @*serverFiltering: true,*@
+                                    k-data-source="{ transport: {read: { url:'@Url.Action("Read_tags", "Resources")', type:'post', dataType: 'json', data: onAdditionalData}} }">
+                           </select>
+                        </div>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="loTitle"> Descripción</label>
+                        <textarea id="text_description" class="editable form-control" ng-model="unidadActual.description" type="text" rows="6"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="col-md-5">
+                    <div class="box-image">
+                        <div class="cubierta" ng-class="{'has-error':unitForm.coverImage.$invalid && !unitForm.$pristine , 'has-success':unitForm.coverImage.$valid}">
+                            <!--<input id="coverImageIn" name="coverImageIn" ng-model="unidadActual.url_cover" type="hidden" required="required" />-->
+
+                            <div class="image-upload">
+                                <label for="input-cover">
+                                    <img id="coverImage" src="/images/iconimage.png" ng-src="{{ unidadActual.url_cover }}" />
+                                </label>
+
+                                <input id="input-cover" name="coverImage" file-model="unidadActual.fileCover" type="file" ng-required="!unidadActual.fileCover" />
+                            </div>
+
+                            <small>Imagen de cubierta obligatoria</small>
+
+                            @*<input id="kendoCoverImage" name="files"
+            type="file"
+            kendo-upload
+            k-async="{ saveUrl: '@Url.Action("UploadImage", "Resources")', autoUpload: true }"
+            k-multiple="false"
+            k-show-file-list="false"
+            k-success="onCoverUploadSuccess" /> *@
+
+                        </div>
+                        <span class="help-block" ng-show="unitForm.coverImage.$invalid && !unitForm.$pristine">Por favor seleccione una imagen</span>
+
+                    </div>
+
+                    Opcional
+                    <div class="box-image-borde">
+                        <div class="cubierta">
+                            <input id="backgroundImageIn" name="backgroundImageIn" ng-model="unidadActual.url_background" type="hidden" />
+
+                            <div class="image-upload">
+                                <label for="input-background">
+                                    <img id="image-background" src="/images/iconimage.png" ng-src="{{ unidadActual.url_background }}" />
+                                </label>
+
+                                <input id="input-background" file-model="unidadActual.fileBackground" type="file" />
+                            </div>
+
+                            <small>Imagen de fondo</small>
+
+                            @*<input id="kendoCoverImage" name="files"
+                                type="file"
+                                kendo-upload
+                                k-async="{ saveUrl: '@Url.Action("UploadImage", "Resources")', autoUpload: true }"
+                                k-multiple="false"
+                                k-show-file-list="false"
+                                k-success="onBackgroundUploadSuccess" />
+                            *@
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="acciones pull-right">
+                <button id="btnSaveUnidad" type="button" ng-click="updateLO()" ng-show="unidadActual.id!=null" class="btn btn-blue"> Guardar <!--i class="fa fa-spinner fa-spin" ng-show="loading"></i--></button>
+                <button id="btnCrearUnidad" ng-click="crearUnidad()" href="#" ng-show="unidadActual.id==null" ng-disabled='!unitForm.$valid' class="btn btn-blue">Crear  <!--i class="fa fa-spinner fa-spin" ng-show="loading"></i--></button>
+                <a ng-click="cancelarUnidad()" href="#" class="btn btn-blue">Volver</a>
+
+                <div class="col-xs-3 col-sm-3 col-md-1">
+                    <span ng-bind="statusMsg"></span>
+                </div>
+            </div>
+
+        </div>
+
+    }
+</div>
+
+
+
+<script>
+
+    var f = $('#unitForm');
+    var url = f.attr('action');
+    f.removeAttr('action');
+    f.attr('asyncAction',url);
+
+    var editor = new MediumEditor('textarea.editable', {
+        buttonLabels: 'fontawesome'
+    });  
+
+    function GetImageUrl(e)
+    {
+        $("#okButton *").removeAttr('disabled').on('click');
+        url_cover = e.response.url;
+        $("#coverImage").attr("src", url_cover);
+        //var input = $("#coverImageIn")
+        //input.val(e.response.url);
+        //input.trigger('input');
+        //angular.element($('#coverImageIn')).triggerHandler('input')
+        //scope.unidadActual.url_cover = e.response.url;
+        console.log(url_cover);
+    }
+
+    //vista previa imagen cover
+    $("#input-cover").change(function (event) {
+        var files = this.files,
+		file = files[0],
+		archivo = new FileReader();
+        archivo.onload = function (event) {
+            $("#coverImage").attr("src", event.target.result);
+        };
+        archivo.readAsDataURL(file);
+    });
+
+    //vista previa imagen background
+    $("#input-background").change(function (event) {
+        var files = this.files,
+		file = files[0],
+		archivo = new FileReader();
+        archivo.onload = function (event) {
+            $("#image-background").attr("src", event.target.result);
+        };
+        archivo.readAsDataURL(file);
+    });
+
+
+</script>
+

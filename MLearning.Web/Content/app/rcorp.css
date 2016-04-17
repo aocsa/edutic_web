@@ -1,0 +1,74 @@
+.ml-parent .box-contenido .container-fluid h2 {
+  border-bottom: 1px solid #5093e1;
+  padding: 0 0 10px;
+  font-size: 1.6em;
+  margin-bottom: 25px; }
+.ml-parent .k-grid {
+  font-size: 1em;
+  border: none; }
+  .ml-parent .k-grid .k-grid-header {
+    border: none; }
+    .ml-parent .k-grid .k-grid-header .k-grid-header-wrap {
+      border: none; }
+  .ml-parent .k-grid th {
+    border: none; }
+    .ml-parent .k-grid th a {
+      text-decoration: none;
+      position: relative;
+      font-size: 1em; }
+      .ml-parent .k-grid th a span.k-icon {
+        position: absolute !important;
+        right: 3%;
+        top: 9px; }
+  .ml-parent .k-grid tr td {
+    border: none;
+    border-bottom: 5px solid white;
+    background: #F6F7FA;
+    font-size: 1.2em; }
+  .ml-parent .k-grid .k-grid-content .fa {
+    width: 18px;
+    height: 18px;
+    padding: 6px;
+    border-radius: 2em;
+    color: white;
+    font-size: 1.2em;
+    margin: 0 2px;
+    text-decoration: none; }
+  .ml-parent .k-grid .k-grid-content tr {
+    text-align: left;
+    color: #9C9E9F; }
+    .ml-parent .k-grid .k-grid-content tr td:first-child {
+      background: white; }
+    .ml-parent .k-grid .k-grid-content tr td:last-child {
+      text-align: center; }
+  .ml-parent .k-grid .k-grid-pager {
+    text-align: center;
+    font-size: 1.1em; }
+    .ml-parent .k-grid .k-grid-pager a,
+    .ml-parent .k-grid .k-grid-pager ul {
+      float: none;
+      border: none;
+      outline: none; }
+    .ml-parent .k-grid .k-grid-pager span.k-state-selected,
+    .ml-parent .k-grid .k-grid-pager .k-state-disabled:hover,
+    .ml-parent .k-grid .k-grid-pager .k-link:hover {
+      border: none;
+      color: black;
+      background: white;
+      border-radius: 2em;
+      text-decoration: underline; }
+    .ml-parent .k-grid .k-grid-pager > .k-link:not(.k-state-disabled):hover {
+      background-color: darkgrey;
+      padding: 2px; }
+.ml-parent .ml-green {
+  background-color: #85d560; }
+.ml-parent .ml-skyblue {
+  background-color: #54bee2; }
+.ml-parent .ml-red {
+  background-color: #ff5668; }
+.ml-parent .ml-yellow {
+  background-color: #fea201; }
+.ml-parent .ml-purple {
+  background-color: #6c6cff; }
+
+/*# sourceMappingURL=rcorp.css.map */

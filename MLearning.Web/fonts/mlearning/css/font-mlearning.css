@@ -1,0 +1,100 @@
+@font-face {
+	font-family: 'mlearning';
+	src:url('../fonts/mlearning.eot?-aw8ixf');
+	src:url('../fonts/mlearning.eot?#iefix-aw8ixf') format('embedded-opentype'),
+		url('../fonts/mlearning.ttf?-aw8ixf') format('truetype'),
+		url('../fonts/mlearning.woff?-aw8ixf') format('woff'),
+		url('../fonts/mlearning.svg?-aw8ixf#mlearning') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.ml-icon {
+	font-family: 'mlearning';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.ml-icon-in:before {
+	content: "\e60b";
+}
+.ml-icon-twitter:before {
+	content: "\e60c";
+}
+.ml-icon-facebook:before {
+	content: "\e60d";
+}
+.ml-icon-asig-profe:before {
+	content: "\e60e";
+}
+.ml-icon-delete:before {
+	content: "\e60f";
+}
+.ml-icon-notas:before {
+	content: "\e610";
+}
+.ml-icon-edit:before {
+	content: "\e611";
+}
+.ml-icon-view:before {
+	content: "\e612";
+}
+.ml-icon-circle:before {
+	content: "\e613";
+}
+.ml-icon-logout:before {
+	content: "\e614";
+}
+.ml-icon-perfil:before {
+	content: "\e615";
+}
+.ml-icon-alumno:before {
+	content: "\e616";
+}
+.ml-icon-unidad:before {
+	content: "\e617";
+}
+.ml-icon-institucion:before {
+	content: "\e618";
+}
+.ml-icon-logo_ed:before {
+	content: "\e605";
+}
+.ml-icon-tarea:before {
+	content: "\e606";
+}
+.ml-icon-logo:before {
+	content: "\e600";
+}
+.ml-icon-mensaje-linea:before {
+	content: "\e601";
+}
+.ml-icon-campana-linea:before {
+	content: "\e602";
+}
+.ml-icon-corazon:before {
+	content: "\e603";
+}
+.ml-icon-pregunta:before {
+	content: "\e604";
+}
+.ml-icon-curso:before {
+	content: "\e607";
+}
+.ml-icon-casa:before {
+	content: "\e608";
+}
+.ml-icon-campana:before {
+	content: "\e609";
+}
+.ml-icon-mensaje:before {
+	content: "\e60a";
+}

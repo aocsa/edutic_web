@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "Circulos";
+    ViewBag.VisibleMenus = "[{codigo: 3},{codigo: 4},{codigo: 5},{codigo: 6}]";
+    ViewBag.ActiveRole = "Director";
+    ViewBag.menu = 6;
+}
+
+<div class="content-box">
+
+    @(Html.Kendo().Grid<MLearning.Core.Entities.circle_by_owner>()
+    .Name("grid-table")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.id).HeaderTemplate("Id").Width(70);
+        columns.Bound(c => c.code).HeaderTemplate("Código");
+        columns.Bound(c => c.name).HeaderTemplate("Nombre");
+        columns.Bound(c => c.owner_fullname).HeaderTemplate("Profesor");
+        columns.Command(command =>
+        {
+            command.Custom("Ver").Click("showDetails").HtmlAttributes(new { @title = "Ver" });
+            command.Edit().UpdateText("Guardar").CancelText("Cancelar").Text(" ").HtmlAttributes(new { @title = "Editar" });
+            //command.Destroy().HtmlAttributes(new {@title = "Eliminar"});
+            command.Custom("delet").Click("eliminarCircle").HtmlAttributes(new { @title = "Eliminar" });
+            command.Custom("admin_alumnos").Click("CircleConsumers").HtmlAttributes(new { @title = "Administrar alumnos" });
+        }).HeaderTemplate("Acciones");
+    })
+
+    .Pageable(pager =>
+     {
+      pager.Messages(messages => messages.Display("{0} - {1} de {2} elementos"));
+      pager.ButtonCount(7);
+      })
+
+    .Sortable(s => s.Enabled(true))
+    .Scrollable(s => s.Enabled(false))
+    .ToolBar(toolbar =>
+                        {
+                            toolbar.Template("<div class='nav-tab'><div class='row'>" +
+                                "<div class='col-md-8'><ul><li>" + @ViewBag.institution.name + "</li><li>Círculos</li></ul></div>" +
+                                "<div class='col-md-4'><div class='pull-right'><a class='btn btn-blue k-grid-add' href='/Head/Circle_read?grid-table-mode=insert'>Nuevo</a>" +
+                                "</div></div>" +
+                                "</div></div>");
+                        })
+    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("Circle"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(8)
+
+        .Events(events => events
+           .Error("error_handler")
+           .RequestEnd("onRequestEnd")
+         )
+         
+        .Model(model =>
+        {
+            model.Id(c => c.id);
+            model.Field(c => c.id).Editable(false);
+            //model.Field(c => c.created_at).Editable(false);
+            //model.Field(c => c.updated_at).Editable(false);
+        })
+        .Create(update => update.Action("Circle_create", "Head"))
+            .Read(read => read.Action("Circle_read", "Head"))
+            .Update(update => update.Action("Circle_update", "Head"))
+            .Destroy(update => update.Action("Circle_destroy", "Head"))
+    )
+
+    .Events(events => events.Edit("onEdit"))
+    )
+
+    <!-- Botones de inforrmacion-->
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="buttons-details">
+                <li><img src="@Url.Content("~/images/visualizar.png")">Visualizar</li>
+                <li><img src="@Url.Content("~/images/editar.png")">Editar</li>
+                <li><img src="@Url.Content("~/images/eliminar.png")">Eliminar</li>
+                <li><img src="@Url.Content("~/images/administrar_alumn.png")">Administrar alumnos</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+@(Html.Kendo().Window().Name("DetailsCircle")
+    .Title("Información del círculo")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(400)
+)
+
+
+<!-- Ventana modal eliminar circle-->
+@(Html.Kendo().Window().Name("eliminarCircle")
+    .Title("")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(400)
+)
+
+
+<script type="text/x-kendo-template" id="template">
+    <div id="details-container">
+        <div class="modal-body form-horizontal">
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Código</label>
+                <div class="col-md-9">
+                    <span>#=code #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Nombre</label>
+                <div class="col-md-9">
+                    <span>#=name #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Tipo</label>
+                <div class="col-md-9">
+                    <span>#=type #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Profesor</label>
+                <div class="col-md-9">
+                    <span>#=owner_fullname #</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer btn-actions">
+            <button class="btn btn-blue" id="CancelCircle"> Cancelar</button>
+        </div>
+
+    </div>
+</script>
+
+
+<script type="text/x-kendo-template" id="template-delet">
+    <div id="details-container">
+        <div class="modal-body">
+            <span>Está seguro que desea eliminar el círculo</span>
+        </div>
+
+        <div class="modal-footer btn-actions">
+            <button class="btn btn-blue" id="yesButton">Si</button>
+            <button class="btn btn-blue" id="noButton"> No</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+
+    function onRequestEnd(e) {
+        if (e.type === "update") {
+            if (!e.response.Errors) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("La información se actualizó correctamente", "Operación Exitosa");
+            }
+        }
+        if (e.type == "create") {
+            if (!e.response.Errors) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("La información se guardó correctamente.", "Operación Exitosa");
+            }
+        }
+        if (e.type == "destroy") {
+            if (!e.response.Errors) {
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.success("El registro se eliminó correctamente.", "Operación Exitosa");
+            }
+        }
+
+        console.log(e);
+    }
+
+    function onEdit(e) {
+        if (e.model.isNew()) {
+            e.container.data("kendoWindow").title("Nuevo círculo");
+        }
+        else {
+            e.container.data("kendoWindow").title("Editar círculo");
+        }
+        e.preventDefault();
+    }
+
+    function CircleConsumers(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        location.href = "/Head/CircleConsumers/"+dataItem.id;
+    }
+
+    function showDetails(e) {
+        e.preventDefault();
+        var detailsTemplate = kendo.template($("#template").html());
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#DetailsCircle").data("kendoWindow");
+
+        wnd.content(detailsTemplate(dataItem));
+        wnd.center().open();
+
+        //button cancelar
+        $("#CancelCircle").click(function () {
+            wnd.close();
+        })
+    }
+
+    function eliminarCircle(e) {
+        var deleteTemplate = kendo.template($("#template-delet").html());
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#eliminarCircle").data("kendoWindow");
+        wnd.content(deleteTemplate(dataItem));
+        wnd.center().open();
+
+        var grid = $("#grid-table").data("kendoGrid");
+
+        //Agregando clase
+        $("#eliminarCircle").parent().addClass("delete");
+
+        $("#yesButton").click(function () {
+            grid.dataSource.remove(dataItem)
+            grid.dataSource.sync()
+            wnd.close();
+        })
+
+        $("#noButton").click(function () {
+            wnd.close();
+        })
+    }
+
+</script>

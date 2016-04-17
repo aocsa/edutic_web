@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html class="ml-parent">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title | MLearning CITEC</title>
+    <link rel="icon" href="@Url.Content("~/images/favicon_64.ico")" type="image/x-icon" />
+    <link rel="shortcut icon" href="@Url.Content("~/images/favicon_128.ico")" type="image/x-icon" />
+    <link href="@Url.Content("~/fonts/mlearning/css/font-mlearning.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/consumerLogin.css")" rel="stylesheet" />
+</head>
+
+<body>
+<!-- <div class="wrap"> -->
+<div class="wrap image-gradient-dynamic">
+    <!-- <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png" alt=""> -->
+    <div class="overlay"></div>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/jquery-2.1.4.js")"></script>
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+<script>
+$(document).ready(function(){
+    //Handles menu drop down
+    $('.login').click(function (e) {
+        $("#ml_signUp").hide();
+        $("#ml_signIn").show();
+
+        $("#ml_signIn #username").focus();
+    });
+
+    $('.register').click(function (e) {
+        $("#ml_signUp").show();
+        $("#ml_signIn").hide();
+    });
+    $("#username").focus();
+});
+</script>
+</body>
+</html>

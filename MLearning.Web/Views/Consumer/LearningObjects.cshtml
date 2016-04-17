@@ -1,0 +1,36 @@
+﻿<!-- Menu secundario-->
+<div class="ml-menu-secundario">
+    <ul class="nav nav-pills btn-sm col-md-9">
+        <li role="presentation"><a href="#/circle/{{idCircle}}/comments">Comentarios</a></li>
+        <li role="presentation" class="active"><a href="#/circle/{{idCircle}}/learningobjects">Unidades</a></li>
+        <li role="presentation"><a href="#/circle/{{idCircle}}/quizzes">Tareas</a></li>
+    </ul>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div id="ml_contenido" class="col-md-9 ml-unidades">
+            <div class="panel-group" id="accordion">
+                <!-- Panel -->
+                <div class="" ng-repeat="lo in learningObjects | orderBy: id" ng-click="loadSections($index)">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"
+                             data-toggle="collapse" 
+                             data-target="#collapse{{lo.id}}"><i class="glyphicon glyphicon-menu-right"></i>
+                            {{lo.title}}
+                        </h4>
+                    </div>
+                    <div id="collapse{{lo.id}}" class="panel-collapse collapse">
+                        <div ng-repeat="section in lo.sections" class="panel-body" ng-click="loadPages(section.id)">
+                            <i class="glyphicon glyphicon-menu-right"></i>
+                            {{section.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comentarios y Actividades -->
+        <page-contact></page-contact>
+    </div>
+</div>

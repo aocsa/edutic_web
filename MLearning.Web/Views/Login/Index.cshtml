@@ -1,0 +1,42 @@
+@model MLearningDB.User
+
+@{
+    Layout = "~/Views/Shared/_LayoutLoginConsumer.cshtml";
+    ViewBag.Title = "Login";
+}
+<div class="conte-form">
+    <h2>EDUTICNOW</h2>
+    @using (Html.BeginForm("Register", "Login", null, FormMethod.Post,new{@id="ml_signUp"}))
+    {
+        <a class="btn login">LOGIN</a>        
+        <div class="input-compuesto">
+            @Html.TextBoxFor(model => model.name, new { placeholder = "FIRST NAME", AutoComplete = false, required = true})
+            @Html.TextBoxFor(model => model.lastname, new { placeholder = "LAST NAME", AutoComplete = false, required = true })
+        </div>
+        @Html.DropDownList("institution", new SelectList(ViewBag.institutions, "id", "name"), "SELECT YOUR SCHOOL", new { required = true })
+        <!-- @Html.TextBoxFor(model => model.email, new { placeholder = "EMAIL", AutoComplete = false, required = true }) -->
+        @Html.TextBoxFor(model => model.username, new { placeholder = "USERNAME", AutoComplete = false, required = true })
+        <input id="password" name="password" type="password" placeholder="NEW PASSWORD" required="required"/>
+        <p>By clicking Sign up, you agree to our <a href="">Terms</a></p>
+        <!-- <p>Al ingresar, estas de acuerdo con nuestros <a href="">T&eacute;rminos de Servicio y Pol&iacute;tica de Privacidad</a></p> -->
+
+        <button class="btn ml-button" type="submit">CREATE ACCOUNT</button>
+    }
+
+
+    <form id="ml_signIn" action="/Login/Login" method="post" style="display:none">
+        <input id="username" type="text" class="form-control" name="username" value="" placeholder="USERNAME" required="required">
+        <input id="password" type="password" class="form-control" name="password" value="" placeholder="PASSWORD" required="required"> 
+        <div class="compuesto">
+            <span>
+                <input type="checkbox" aria-label="...">REMEMBER ME
+            </span>
+            <a href="">FORGOT PASSWORD?</a>
+        </div>
+        <div class="compuesto">
+            <button type="submit" class="btn ml-button">SIGN IN</button>
+            <a class="register" href="">CREATE ACCOUNT</a>
+        </div>
+        <span>@ViewBag.message</span>
+    </form>
+</div>

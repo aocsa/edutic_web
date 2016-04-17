@@ -1,0 +1,53 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div id="ml_contenido" class="col-md-9">
+            <div class="row">
+                <h1 class="text-center">Cursos Matriculados</h1>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="circle in ciclesByUser">
+                        Curso: <h4>{{circle.name}}</h4>
+                    </li>
+                </ul>
+            </div>  
+            <div class="row">
+                <h1 class="text-center">Cursos disponibles</h1>
+                <p>Search by course name</p>
+                <ul class="list-group">
+                    <input id="courses" ng-model="q" type="text" class="form-control" name="courses" value="" placeholder="Enter course name">
+                    <li style="cursor: pointer;" ng-click="addCourse(circle)" class="list-group-item" 
+                            ng-repeat="circle in circlesByInstitution | filter:{name:q} as results">
+                        <h3 class="name">{{circle.name}}</h3>
+                        <p class="born">{{circle.owner_fullname}}</p>
+                    </li>
+                    <li class="animate-repeat" ng-if="results.length == 0">
+                        <strong>No results found...</strong>
+                    </li>
+                </ul>
+            </div>   
+        <div id="ml_datos" class="col-md-3">
+            <div class="container-fluid">
+                <div class="ml-actividad col-md-12 col-xs-4">
+                    <h3>ACTIVIDAD</h3>
+                    <p>{{onlineToday}} people online today</p>
+                    <!--p>32 people onile this week</p-->
+                </div>
+                <div class="ml-personas col-md-12 col-xs-8">
+                    <h3>PERSONAS</h3>
+                    <div>
+                        <ul class="ml-avatar-user ml-avatar-s">
+                            <li ng-repeat="consumer in consumerByInstitution">
+                                <span class="pull-left">
+                                    <span ng-show="!consumer.image_url">{{consumer.name| capitalize | limitTo:1}}</span>
+                                    <img ng-show="consumer.image_url" ng-src="{{consumer.image_url ? consumer.image_url : ''}}" alt="Avatar" class="" />
+                                </span>
+
+                                <p>{{consumer.name}} {{consumer.lasname}}</p>
+                                <p class="{{consumer.is_online ? 'ml-on':'ml-off'}}">{{consumer.is_online ? 'online':'offline'}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .row -->
+</div><!-- .container-fluid -->

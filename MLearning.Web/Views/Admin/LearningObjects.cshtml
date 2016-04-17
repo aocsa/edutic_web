@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "LearningObjects";
+    ViewBag.VisibleMenus = "[{codigo: 0},{codigo: 1},{codigo: 2}]";
+    ViewBag.ActiveRole = "Super administrador";
+    ViewBag.menu = 2;
+}
+
+<div class="content-box">
+
+    @(Html.Kendo().Grid<MLearning.Core.Entities.lo_by_owner>()
+    .Name("grid-table")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.id).HeaderTemplate("Id").Width(70);
+        columns.Bound(c => c.title).HeaderTemplate("Nombre");
+        columns.Bound(c => c.fullname).HeaderTemplate("Autor");
+        columns.Bound(c => c.created_at).HeaderTemplate("Creación");
+        columns.Command(command => command.Custom("Ver").Click("showDetails").HtmlAttributes(new {@title = "Ver"})).HeaderTemplate("Acciones");
+
+    })
+    .Pageable(pager =>
+    {
+        pager.Messages(messages => messages.Display("{0} - {1} de {2} elementos"));
+        pager.ButtonCount(7);
+    })
+
+    .Sortable(s => s.Enabled(true))
+    .Scrollable(s => s.Enabled(false))
+    .ToolBar(toolbar =>
+      {
+          toolbar.Template("<div class='nav-tab'><div class='row'>" +
+            "<ul><li>Unidades</li></ul>" +
+            "</div></div>");
+      })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(7)
+        .Events(events => events.Error("error_handler"))
+        .Model(model =>
+        {
+            model.Id(c => c.id);
+            model.Field(c => c.id).Editable(false);
+            model.Field(c => c.created_at).Editable(false);
+            //model.Field(c => c.updated_at).Editable(false);
+        })
+        .Read(read => read.Action("Units_read", "Admin"))
+    )
+    )
+
+
+    <!-- Botones de inforrmacion-->
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="buttons-details">
+                <li><img src="@Url.Content("~/images/visualizar.png")">Visualizar</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+@(Html.Kendo().Window().Name("Details")
+    .Title("Información de la unidad")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(400)
+)
+
+<script type="text/x-kendo-template" id="template">
+    <div id="details-container">
+        <div class="modal-image">
+            <img class="img-thumbnail" src="#=url_cover#" />
+        </div>
+        <div class="modal-body form-horizontal">
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Nombre</label>
+                <div class="col-md-9">
+                    <span>#=title #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Creación</label>
+                <div class="col-md-9">
+                    <span>#=created_at #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Tipo</label>
+                <div class="col-md-9">
+                    <span>#=type #</span>
+                </div>
+            </div>
+
+            <h5>INFORMACIÓN DEL AUTOR</h5>
+            <div class="form-group">
+                <label class="control-label col-md-3">Autor</label>
+                <div class="col-md-9">
+                    <span>#=fullname #</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Email</label>
+                <div class="col-md-9">
+                    <span>#=email #</span>
+                </div>
+            </div>
+            
+        </div>
+        <div class="modal-footer btn-actions"> 
+            <a href="@Url.Action("LODetail")/#=id #" class="btn btn-blue">Visualizar contenido</a> 
+            <a href="javascript:CancelClicUnid();" class="btn btn-blue">Cancelar</a>
+        </div>
+
+    </div>
+</script>
+
+
+<script type="text/javascript">
+
+    function CancelClicUnid() {
+        $("#Details").data("kendoWindow").close();
+    }
+
+    function showDetails(e) {
+        e.preventDefault();
+        var detailsTemplate = kendo.template($("#template").html());
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#Details").data("kendoWindow");
+
+        wnd.content(detailsTemplate(dataItem));
+        wnd.center().open();
+    }
+</script>

@@ -1,0 +1,23 @@
+<div class="well">
+    <div class="row">
+        <div class="col-md-11">
+            <div class="form-group">
+                <input ng-model="page.slide.lotitle" class="form-control" type="text" placeholder="T&iacute;tulo (Opcional)" required="required">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control"
+                          ng-model="page.slide.loparagraph" type="text"
+                          placeholder="Texto" rows="5" required="required"></textarea>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <a href="" ng-click="pages.splice($index,1); ">
+                <span class="glyphicon  glyphicon-remove" aria-hidden="true"></span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+

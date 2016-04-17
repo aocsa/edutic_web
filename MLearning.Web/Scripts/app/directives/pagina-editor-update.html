@@ -1,0 +1,26 @@
+
+            <div ng-repeat="slide in loslide track by $index"  ng-switch on="slide.lotype" class='animate-list' >
+                <pg-slide ng-switch-when='0' tipo="cero">  </pg-slide>
+                <pg-slide ng-switch-when='1' tipo="primero">  </pg-slide>
+                <pg-slide ng-switch-when='2' tipo="segundo">  </pg-slide>
+                <pg-slide ng-switch-when='3' tipo="tercero">  </pg-slide>
+                <pg-slide ng-switch-when='4' tipo="cuarto">  </pg-slide>
+                <pg-slide ng-switch-when='5' tipo="quinto">  </pg-slide>
+                <pg-slide ng-switch-when='6' tipo="sexto">  </pg-slide>
+                <pg-slide ng-switch-when='7' tipo="septimo">  </pg-slide>
+            </div>
+
+<div class="row">
+    <div class="acciones pull-right">
+        <a ng-click="guardarPagina()" href="#" class="btn btn-blue">Guardar</a>
+        <a ng-click="cancelarPagina()" href="#" class="btn btn-blue">Volver</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+

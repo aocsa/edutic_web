@@ -1,0 +1,21 @@
+﻿@model MLearningDB.Circle
+
+@using (Html.BeginForm())
+{
+     
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.created_at)
+        @Html.HiddenFor(model => model.owner_id)
+        @Html.HiddenFor(model => model.updated_at)
+        @Html.HiddenFor(model => model.type)
+
+    <fieldset>
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, "Circulo", new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.name, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+    </fieldset>     
+}

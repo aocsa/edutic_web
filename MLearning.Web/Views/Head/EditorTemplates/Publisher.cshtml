@@ -1,0 +1,89 @@
+﻿@model MLearning.Core.Entities.publisher_by_institution
+
+@using (Html.BeginForm("Publishers", "Head", FormMethod.Post, new { id = "modalForm", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.institution_id)
+    /*@Html.HiddenFor(model => model.created_at)
+    @Html.HiddenFor(model => model.updated_at)*/
+
+    <fieldset>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="name">Nombres <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.name, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese el nombre" })
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="lastname">Apellidos <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.lastname, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese los apellidos" })
+                @Html.ValidationMessageFor(model => model.lastname)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.country, "País", new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.country, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.country)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.region, "Región/Estado", new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.region, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.region)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.city, "Ciudad", new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.city, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.city)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.institution_id, "Institución Educativa", new { @class = "col-md-3 control-label" })
+
+            <div class="col-md-9">
+                <input id="institutionName" class="k-textbox" disabled readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.telephone, "Teléfono", new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.telephone, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.telephone)
+                <!--(Html.Kendo().MaskedTextBoxFor(model => model.telephone)
+                     .Mask("(999) 0000000"))-->
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="email">Email <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.email, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese el correo electrónico" })
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="username">Usuario <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.username, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese el usuario" })
+                @Html.ValidationMessageFor(model => model.username)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="password" style="padding-right: 0; padding-left: 0;">Contraseña<span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.PasswordFor(model => model.password, new { value = "", @class = "k-textbox", @required = "required", validationmessage = "Ingrese la contraseña" })
+                @Html.ValidationMessageFor(model => model.password, "", new { value = "" })
+            </div>
+        </div>
+    </fieldset>
+}

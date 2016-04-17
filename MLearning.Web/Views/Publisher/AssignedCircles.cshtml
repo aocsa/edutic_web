@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "AssignedCircles";
+    ViewBag.VisibleMenus = "[{codigo: 7},{codigo: 8},{codigo: 9}]";
+    ViewBag.ActiveRole = "Profesor";
+    ViewBag.menu = 7;
+}
+
+<div class="content-box">
+    <!-- Tabla -->
+    @(Html.Kendo().Grid<MLearningDB.Circle>()
+    .Name("grid-table")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.id).Width("70px").Title("Id");
+        columns.Bound(c => c.code).Title("Codigo");
+        columns.Bound(c => c.name).Title("Nombre");
+
+        columns.Template(c => { }).ClientTemplate(
+            @Html.ActionLink("<img src=../../images/administrar_alumn.png>", "CircleConsumers", new { id = "#=id#" }, new { @class = "btn-icon", @title = "Alumnos" }).ToHtmlString() + " " +
+            @Html.ActionLink("<img src=../../images/administrar_unidades.png>", "LearningObjects", new { id = "#=id#" }, new { @class = "btn-icon", @title = "Unidades" }).ToHtmlString()
+        ).HeaderTemplate("Acciones");
+    })
+    .Pageable(pager => pager.Info(false).Messages(msg => msg.Empty("No se encontraron datos.")))
+    .Sortable(s => s.Enabled(true))
+    .Scrollable(s => s.Enabled(false))
+    .ToolBar(toolbar =>
+      {
+       toolbar.Template("<div class='nav-tab'><div class='row'>" +
+           "<div class='col-md-8'><ul><li>" + @ViewBag.institution.name + "</li><li>Círculos asignados</li></ul></div>" +
+           "<div class='col-md-4'></div>" +
+          "</div></div>");
+       })
+    
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Events(events => events.Error("error_handler"))
+        .Model(model =>
+        {
+            model.Id(c => c.id);
+            model.Field(c => c.id).Editable(false);
+            model.Field(c => c.created_at).Editable(false);
+            model.Field(c => c.updated_at).Editable(false);
+        })
+        .Read(read => read.Action("Circle_read", "Publisher"))
+    )
+   )
+
+    <!-- Botones de inforrmacion-->
+    <ul class="buttons-details">
+        <li><img src="../../images//administrar_alumn.png">Alumnos inscriptos</li>
+        <li><img src="../../images/administrar_unidades.png">Administrar unidades</li>
+    </ul>
+
+</div>

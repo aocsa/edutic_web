@@ -1,0 +1,58 @@
+<div class="well">
+    <div class="row">
+        <div class="col-md-11">
+            <div class="form-group">
+                <input ng-model="page.slide.lotitle" class="form-control" type="text" placeholder="T&iacute;tulo (Opcional)" required="required">
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4 col-md-4" ng-repeat="item in page.slide.loitemize.loitem">
+                    <div class="thumbnail">
+
+                        <div class="box-image">
+                            <div class="cubierta">
+
+                                <input name="urlImageIn" ng-model="item.loimage" type="hidden" />
+                                <img id="coverImage" src="/images/029_icon_imagen.png" ng-src="{{ item.loimage }}" />
+                                <small>Imagen</small>
+
+                                <input name="files4{{$index}}"
+                                        id ="files4{{$index}}"
+                                        data-indexparent="{{$parent.$index}}"
+                                        data-index="{{$index}}"
+                                        type="file"
+                                        kendo-upload
+                                        k-async="{ saveUrl: '/Resources/UploadImage', autoupload: true }"
+                                        k-multiple="false"
+                                        k-show-file-list="false"
+                                        k-success="onUploadSlideImageSuccess2" />
+
+                            </div>
+                        </div>
+
+                        <input ng-model="item.lotext" class="form-control" type="text" placeholder="Titulo de Imagen">
+                        <!--<textarea ng-model="item.lotext" class="form-control" placeholder="Titulo de Imagen"></textarea>-->
+                    </div>
+  
+                </div>
+            </div>
+
+            <div ng-click="addImageItem(page.slide.loitemize.loitem);">
+                Agregar
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <a href="" ng-click="pages.splice($index,1); ">
+                <span class="glyphicon  glyphicon-remove" aria-hidden="true"></span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

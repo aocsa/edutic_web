@@ -1,0 +1,112 @@
+﻿@model MLearningDB.User
+
+<!-- Modal Formulario de perfil -->
+@using (Html.BeginForm("updateUser", "Home", FormMethod.Post, new { id = "modalForm", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.created_at)
+    @Html.HiddenFor(model => model.updated_at)
+    @Html.HiddenFor(model => model.social_id)
+    @Html.HiddenFor(model => model.is_online)
+
+    <fieldset>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="name">Nombres <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.name, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese sus nombres" })
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3" for="lastname">Apellidos <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.lastname, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese su apellidos" })
+                @Html.ValidationMessageFor(model => model.lastname)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3" for="username">Usuario <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.username, new { @class = "k-textbox", @required = "required", validationmessage = "Ingrese su usuario" })
+                @Html.ValidationMessageFor(model => model.username)
+            </div>
+        </div>
+        <div class="form-group"> 
+            <label class="control-label col-md-3" for="passwordt" style="padding-right: 0; padding-left: 0;">Contraseña <span class="asterisk">*</span></label>
+            <div class="col-md-9">
+                @Html.PasswordFor(model => model.passwordt, new { @class = "k-textbox", value = "00000000", @required = "required", validationmessage = "Ingrese su contraseña" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3" for="email">Email</label>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.email, new { @class = "k-textbox" })
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="upload-image col-md-3">
+                @Html.LabelFor(model => model.image_url, "Foto de perfil", new { @class = "control-label" })
+                <div class="fileUpload btn">
+                    <span>Seleccionar</span>
+                    <input type="file" class="upload" />
+                </div>
+            </div>
+            <div class="col-md-9">
+                <img src="/images/imagen_form.png" class="small-perfil">
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="btn-actions">
+        <button  class="btn btn-blue">Editar</button>
+        <a href="javascript:CancelClick();" class="btn btn-blue">Cancelar</a>
+    </div>
+}
+
+
+<script>
+    $("#modalForm").submit(function (e) {
+        var postData = $(this).serializeArray();
+        var formURL = $(this).attr("action");
+        console.log("datos",postData);
+        $.ajax(
+        {
+            url: formURL,
+            type: "POST",
+            data: postData,
+            success: function (data, textStatus, jqXHR) {
+                if(data.errors)
+                { console.log(data.errors); }
+                var window = $("#modalWindow");
+                if (window) {
+                    toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                    toastr.success("La información se actualizó correctamente.", data);
+                   
+                    window.data("kendoWindow").close();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var errors = jqXhr.responseJSON;
+                var errorsHtml = '';
+                $.each(errors, function (key, value) {
+                    errorsHtml += '<li>' + value[0] + '</li>';
+                });
+
+                toastr.options = { "positionClass": "toast-bottom-right", "closeButton": true, }
+                toastr.error(errorsHtml, "Error");
+                
+                
+            }
+        });
+        e.preventDefault(); //STOP default action
+        //e.unbind(); //unbind. to stop multiple form submit.
+    });
+
+    function CancelClick() {
+        $('#modalWindow').data("kendoWindow").close();
+    }
+</script>

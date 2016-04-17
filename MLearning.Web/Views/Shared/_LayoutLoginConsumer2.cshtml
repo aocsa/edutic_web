@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html class="ml-parent">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title | MLearning CITEC</title>
+    <link rel="icon" href="@Url.Content("~/images/favicon_64.ico")" type="image/x-icon" />
+    <link rel="shortcut icon" href="@Url.Content("~/images/favicon_128.ico")" type="image/x-icon" />
+    <link href="@Url.Content("~/fonts/mlearning/css/font-mlearning.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/consumerLogin.css")" rel="stylesheet" />
+</head>
+
+<body>
+<div class="wrap">
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <!-- Menu para moviles -->                
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <!-- <i class="glyphicon glyphicon-menu-hamburger"></i> -->
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar top-bar"></span>
+                        <span class="icon-bar middle-bar"></span>
+                        <span class="icon-bar bottom-bar"></span>
+                    </button>
+                    <!-- Logo -->                
+                    <a class="navbar-brand logo" href="#">EDUTICNOW</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    
+                    <div class="navbar-right ml-dropdown-signIn">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">INICIAR SESIÓN <b class="caret hidden-xs"></b></a>
+                        <form id="ml_signIn" action="/Login/Login" method="post" class="navbar-form dropdown-menu" role="form">
+                            <div class="input-group">
+                                <input id="username" type="text" class="form-control" name="username" value="" placeholder="Nombre de usuario">
+                            </div>
+                            <div class="input-group">
+                                <input id="password" type="password" class="form-control" name="password" value="" placeholder="Contraseña">                                        
+                            </div>
+                            <button type="submit" class="btn ml-button">Entrar</button>
+                            <span>@ViewBag.message</span>
+                        </form>
+                    </div>
+                    <h3 class="visible-xs-block">MENU</h3>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">ADMINISTRADORES<span class="hidden-xs">&nbsp;&nbsp;|&nbsp;&nbsp;</span></a></li>
+                        <li><a href="#">PROFESORES<span class="hidden-xs">&nbsp;&nbsp;|&nbsp;&nbsp;</span></a></li>
+                        <li><a href="#">ALUMNOS</a></li>                       
+                    </ul>
+                    <h3 class="visible-xs-block">ACERCA DE</h3>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </header>
+    <div class="container-fluid">
+        @RenderBody()
+
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/jquery-2.1.4.js")"></script>
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+<script>
+$(document).ready(function(){
+    //Handles menu drop down
+    $('.dropdown-menu').click(function (e) {
+        e.stopPropagation();
+    });
+    $("#username").focus();
+});
+</script>
+</body>
+</html>

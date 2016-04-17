@@ -1,0 +1,890 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    min-height: 510px;
+}
+.center{
+    text-align: center;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/*
+.form-horizontal .form-group{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+*/
+
+/***** Actualizando estilos Site Web *****/
+
+/*******************Menu*****************/
+.container-navbar:before,
+.container-navbar::after{
+    display: table;
+    content: " ";
+}
+.container-navbar:after{
+    clear: both;
+}
+.container-navbar{
+    margin-right: auto;
+    margin-left: auto;
+}
+.navbar {
+  height: 58px;
+  background-color: #323544;
+  border: none;
+  border-radius: 0;
+}
+.navbar-header{
+	background-color: #5093E1;
+}
+.navbar-brand {
+    float: left;
+    padding: 10px 42px;
+    line-height: 20px;
+    height: 58px !important;
+}
+.navbar-brand > img{
+	height: 38px;
+	display: block;
+}
+.navbar-collapse{
+    height: auto;
+    padding-left: 0;
+    padding-right: 0;
+ }
+.navbar-collapse .navbar-nav.navbar-left:first-child{
+    margin-left: 0;
+}
+.navbar-toggle{
+    padding: 13px 10px;
+}
+.navbar-toggle .icon-bar{
+    background-color: #FFF;
+}
+.nav, .nav-tab {
+  padding-left: 0;
+  list-style: none;
+}
+.nav > li {
+  min-width: 140px;
+  padding: 10px 0;
+}
+.nav > li > a {
+  color: #757C81;
+  text-transform: uppercase;
+  font-size: 11px;
+  text-align: center;
+  padding: 10px 15px !important;
+}
+.nav > li.active > a{
+	color: #fff;
+}
+.nav-right{
+	display: inline-block;
+	background-color: #5093E1;
+	margin: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.nav-right li{
+  position: relative;
+  display: inline-block;
+}
+.nav-right > li {
+	font-size: 12px;
+	color: #fff;
+	padding: 10px 3px;
+}
+.nav-right > li > span{
+    cursor: pointer;
+}
+.nav-right span{
+	font-size: 14px;
+}
+.navbar-nav > li >a:hover,.navbar-nav >li >a:active,.navbar-nav > .active >a:focus,.navbar-nav >.active >a,.navbar-nav > .active >a:hover,.nav > li > a:hover,
+.nav > li > a:focus{
+    background-color: #323544 !important;
+}
+
+.navbar-nav img{
+	height: 13px;
+	margin-right: 5px;
+    transform: translateY(-15%);
+    -webkit-transform: translateY(-15%);
+    -ms-transform: translateY(-15%);
+}
+/*****Iconos*******/
+.navbar-nav .ml-icon {
+    font-size: 13px;
+    top: 1px;
+    position: relative;
+}
+.navbar-nav .active .ml-icon{
+    background-color: #5093E1;
+    border-radius: 25px;
+    padding: 5px;
+}
+.navbar-nav .active .ml-icon-casa{
+    background-color: transparent;
+}
+.navbar-nav .ml-icon-asig-profe,.navbar-nav .ml-icon-circle,.navbar-nav .ml-icon-alumno{
+    font-size: 15px;
+}
+/******tab de navegacion*****/
+.nav-tab{
+  border-bottom: 1px solid #5093E1;
+  margin-bottom: 28px;
+  padding-top: 50px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  color: #707173;
+}
+.nav-tab .col-md-8, .nav-tab .col-md-4 {
+    padding-right: 0;
+    padding-left: 0;
+}
+.nav-tab ul{
+    padding: 7px 0;
+}
+.nav-tab ul > li {
+  position: relative;
+  display: inline-block;
+  padding: 0 15px;
+  border-right: 1px solid #5093E1;
+  font-size: 18px;
+  color: #707173;
+}
+.nav-tab ul > li:first-child{
+   padding: 0 15px 0 0;
+}
+.nav-tab ul > li:last-child{
+  border-right: none;
+}
+.nav-tab .k-button, .nav-tab .superior{
+    margin-left: 12px !important;
+} 
+.nav-tab .btn, .nav-tab .k-button, .nav-tab .superior{
+    min-width: 85px;
+    padding: 7px 12px;
+} 
+.nav-tab .atras{
+    margin-bottom: 15px;
+}
+.nav-tab.especial{
+    padding-top: 0;
+}
+.role-user{
+    
+}
+.perfil{
+	padding: 14px 15px 10px 3px !important;
+}
+.perfil img{
+	height: 34px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.navbar-form {
+	display: inline-block;
+	padding: 0 15px;
+	
+}
+.navbar-form .form-group{
+	vertical-align: middle; 
+}
+.navbar-form .form-group input{
+  height: 30px;
+  padding: 6px 12px 6px 30px;
+  line-height: 1.3333333;
+  border-radius: 14px;
+  border: none;
+  background: url(../images/busqueda.png) no-repeat 5% center #fff !important;
+}
+
+/***************** Footer***************/
+.pie{
+	text-align: center;
+	font-size: 13px;
+	color: #868889;
+	border-top: 1px solid #5093E1;
+	margin: 0 auto;
+}
+.pie a{
+    text-decoration: none;
+    color: #868889;
+}
+.socials{
+	padding-left: 0;
+  list-style: none;
+  display: inline-block;
+  margin: 5px;
+}
+.socials > li {
+  position: relative;
+  display: inline-block;
+  padding: 10px 7px;
+}
+.socials img{
+	width: 38px;
+	vertical-align: middle;
+}
+
+/********* boxes*********************/
+.content-box{
+	margin: 0 auto 15px;
+    min-height: 475px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.boxes{
+	padding-top: 165px;
+}
+.box{
+	text-align: center;
+	display: inline-block;
+	min-width: 250px;
+	min-height: 125px;
+	border-left: 1px solid #B0B2B3;
+	border-right: 1px solid #B0B2B3;
+	border-bottom: 1px solid #B0B2B3;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding-top: 30px;
+    margin-right: 12px;
+    color: #9B9D9F;
+    font-size: 16px;
+    cursor: pointer;
+}
+.box > a{
+	color: #B0B2B3;
+	font-size: 16px;
+
+}
+.box img{
+	height: 60px;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
+.box.institutions,.box.circles{
+    background: url('../images/institucion_esquina.png');
+    background-size: 50px;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+
+.box.unidads,.box.students{
+    background: url('../images/unidad_esquina.png');
+    background-size: 50px;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+.box.teacher{
+    background: url('../images/profesor_esquina.png');
+    background-size: 50px;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+.boxes .col-md-6{
+    padding-right: 0;
+    padding-left: 0;
+}
+.boxes .borde{
+    border: 3px solid #FFF;
+    min-width: 250px;
+    display: inline-block;
+    min-height: 125px;
+
+    border-left: 3px solid #FFF;
+	border-right: 3px solid #fFF;
+	border-bottom: 3px solid #FFF;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+form#logoutForm {
+    display:none;
+}
+/*************************** Modal Formulario Kendo ***********/
+.form-group .k-widget, .form-group .k-textbox {
+    width: 100%;
+}
+.k-widget, .k-widget * {
+   box-sizing: border-box !important;
+}
+#modalForm .form-group .k-textbox {
+    height: 38px;
+    border-radius: 0;
+    color: #9C9E9F;
+}
+#modalForm .form-group span.k-dropdown-wrap {
+    border-radius: 0;
+}
+#modalForm .form-group .k-dropdown-wrap .k-input{
+    height: 35px;
+    line-height: 35px;
+}
+#modalForm .form-group .k-dropdown-wrap.k-state-hover{
+    border-color: #ccc !important;
+    box-shadow: none;
+}
+#modalForm fieldset{
+    padding: 15px 20px;
+}
+#modalForm .form-group{
+    margin-bottom: 8px !important;
+}
+#modalForm label, #details-container label{
+    color: #000;
+    font-weight: normal;
+}
+#modalForm .form-group .form-control{
+    border-radius: 0;
+}
+#modalForm .small-perfil{
+  width: 90px;
+}
+#modalForm .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 7px;
+     border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#modalForm .fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+div.k-window{
+    background-clip: padding-box;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.5);
+    padding-top: 10px !important;
+    border: 0;
+}
+#modalWindow.k-window-content{
+    padding: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    overflow: inherit;
+}
+
+#modalWindow_wnd_title, #Details_wnd_title, .k-window-title{
+    color: #5093E1;
+    padding: 15px 15px 10px 15px;
+    position: relative !important;
+}
+#modalWindow_wnd_title .k-window-titlebar .k-window-actions{
+    padding-top: 0;
+    right: 0.9em !important;
+}
+.btn-actions, .k-edit-buttons {
+  padding: 8px;
+  text-align: right;
+  background-color: #5093E1;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.btn-blue, .k-button.k-primary, .k-button.k-grid-cancel,.btn-pink,.btn-sky{
+    color: #FFF !important;
+    border: none !important;
+}
+.btn-blue, .k-button.k-primary, .k-button.k-grid-cancel{
+  background-color: #5093E1 !important;
+  /*font-size: 13px !important; */
+}
+.k-button.k-grid-cancel:active,.k-button.k-grid-cancel:active:focus{
+    box-shadow: none !important;
+}
+.btn-sky{
+    background-color: #4EB1DF !important;
+}
+.btn-pink{
+    background-color: #ED5C8A !important;
+}
+
+.footer-acciones .glyphicon,.page-seccion .glyphicon{
+    font-size: 7px;
+    top: 0;
+}
+.footer-acciones .btn,.page-seccion .btn{
+    font-size: 13px;
+    padding: 8px 12px;
+}
+.k-window .k-button span.k-icon{
+  display:none; 
+}
+.listConsumer span.k-icon.k-delete{
+    display: inline-block;
+}
+.k-edit-form-container .k-edit-buttons{
+    padding: 7px !important;
+}
+.btn-actions .btn-blue:hover, .btn-actions .btn-blue:active{
+    color: #fff;
+}
+.k-block > .k-header, .k-window-titlebar{
+    position:relative !important;
+    height: auto !important;
+    margin-top: 0 !important;
+    border-color: #5093E1 !important;
+    background-color:#FFF !important;
+    padding: 0.5em 0 !important;
+}
+.k-window-titlebar .k-window-actions{
+    right: 0.9em !important;
+    padding-top: 0 !important;
+}
+.k-state-hover, k-state-hover:hover{
+    background-color:#FFF !important;
+    border-color:#FFF !important;
+}
+.k-state-focused, .k-button:focus, .k-button.k-state-focused, .k-button:focus:active{
+    box-shadow: none !important;
+}
+
+/*******MOdal seleccionar alumnos*********^*******************/
+.listConsumer .k-multiselect .k-button, .listConsumer .k-multiselect .k-button:hover,.listConsumer .k-multiselect .k-state-hover {
+    color: #555;
+    border-color: #C1C1C1 !important;
+    background-color: #F5F5F5 !important;
+}
+.listConsumer .form-group .k-widget{
+    min-height: 50px;
+    background-color: #fff;
+}
+/******************Table Grid Kendo UI***********************/
+#grid-table.k-grid table{
+  background-color: transparent;
+  border-collapse: collapse;
+}
+#grid-table.k-grid tr td,#grid-table .k-grid-header th.k-header,#grid-table .k-filter-row th,#grid-table.k-widget{
+    border-width:0;111
+}  
+#grid-table .k-grid-header,.k-grid-header, #grid-table .k-header{
+    background-color: #FFF !important;
+}
+#grid-table .k-grid-header th.k-header{
+   
+}
+#grid-table.k-widget, #grid-table .k-widget, #grid-table .k-pager-numbers .k-state-selected{
+   box-shadow: none;
+}
+.btn-icon img, .buttons-details img{
+  margin-right: 7px;
+  width: 26px;
+  vertical-align: middle;
+}
+#grid-table.k-grid tr td{
+    color: #555;
+    background-color: #F6F7FA;
+    padding: 9px 12px;
+}
+#grid-table.k-grid tr td:first-child{
+  background-color: #FFF;
+}
+#grid-table.k-grid tr{
+    border-bottom: 6px solid #FFF;
+}
+#grid-table .k-pager-wrap{
+    background-color: #FFF;
+    text-align: center;
+    border-color:#FFF;
+    border-bottom: 5px solid #F6F7FA;
+    margin: 15px 0 20px 0;
+}
+#grid-table .k-pager-wrap > .k-link{
+    border-width: 0;
+    float: none;
+    display: inline-block;
+}
+#grid-table .k-pager-numbers .k-state-selected{
+    background-color: #FFF;
+    color: #9C9E9F;
+    border-width: 0;
+}
+#grid-table .k-pager-numbers{
+    float: none;
+}
+#grid-table input.k-input{
+    background-image: url("../images/busqueda.png") !important;
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    background-size: 17px;
+    padding: 6px 27px 6px 2px;
+}
+#grid-table .k-grid-toolbar{
+    padding:0;
+}
+#grid-table .k-grid-toolbar:first-child, #grid-table .k-pager-numbers .k-link {
+    border-width: 0;
+ }
+#grid-table .k-button{
+    border-width: 0;
+    background-color: transparent;
+    margin: 0;
+    min-width: 20px;
+}
+#grid-table .k-button:active, #grid-table .k-button:focus{
+    box-shadow: none !important;
+    outline: 0 none;
+    border-color: none;
+    background-color: none;
+}
+.k-pager-wrap>.k-link.k-pager-nav{
+    min-width: 0;
+}
+/*******Iconos kendo grid *******/
+#grid-table a[class^="k-button"]{
+   background-size: 26px 26px;
+   background-repeat: no-repeat;
+   width:30px;
+   height:30px;
+   text-indent:-9999px;
+   margin: 0 3px;
+}
+#grid-table .k-button.k-grid-edit, .k-button.k-grid-editar{
+   background-image: url("../images/editar.png");
+   
+}
+#grid-table .k-button.k-grid-editar:hover, .k-button.k-grid-editar:active, .k-button.k-grid-editar:focus{
+   background-image: url("../images/editar.png"); 
+}
+#grid-table .k-button.k-grid-delete, #grid-table .k-button.k-grid-delet {
+   background-image: url("../images/eliminar.png");
+}
+#grid-table .k-button.k-grid-delete.quitar, #grid-table .k-button.k-grid-delet.quitar{
+   background-image: url("../images/quitar.png");
+}
+#grid-table .k-button.k-grid-Ver{
+   background-image: url("../images/visualizar.png");
+}
+#grid-table .k-button.k-grid-admin_alumnos{
+   background-image: url("../images/administrar_alumn.png");
+}
+#grid-table .k-button.k-grid-asignar_prof{
+   background-image: url("../images/asignar_prof.png");
+}
+div.k-window-content{
+    overflow: visible !important; 
+}
+/******* Botones de indicaciones******************/
+.buttons-details{
+	text-align: center;
+	margin: 0;
+    list-style: none;
+}
+.buttons-details > li{
+  position: relative;
+  display: inline-block;
+  padding: 10px 7px;
+  font-size: 14px;
+  color: #707173;
+}
+
+.buttons{
+	text-align: center;
+	margin: 52px 0;
+}
+.buttons img,.buttons-seccion img{
+  width: 38px;
+  vertical-align: middle;
+}
+
+/**************Ventana Modal*************/
+.modal-image{
+    text-align:center;
+    padding: 15px 0 5px;
+}
+.modal-image img{
+    height: 140px;
+}
+#Details, #detalleInstitucion, #DetailsPublisher,#DetailsConsumer,#DetailsCircle, #AsigProfesor,#selectConsumer,#selectUnidades, 
+#eliminarInstitucion, div.k-window-content{
+    padding: 0 !important;
+}
+#details-container .modal-footer{
+    border-radius: 0 0 4px 4px;
+}
+
+#details-container .modal-body, .listConsumer .modal-body{
+  padding: 22px 30px 20px 15px;
+}
+#details-container .modal-body h5{
+    font-weight:bold;
+    margin: 25px 0 18px;
+}
+#details-container .form-horizontal span{
+    border-bottom: 1px solid #ccc;
+    padding: 8px 5px;
+    display: block;
+    color: #9C9E9F;
+}
+/****Ventana modal delete*****/
+.k-window.delete .k-window-titlebar{
+   border-bottom-style: none;
+   border-bottom-width: 0;
+}
+.k-window.delete .modal-body span{
+    font-size: 13px;
+    padding: 0 0 25px 25px;
+    display: block;
+    margin-top: -10px;
+}
+.modal-footer button{
+    margin-right: 20px;
+}
+/*****************Unidade Crear*******/
+.well{
+    background-color: #F6F7FA;
+    border: 1px solid #F6F7FA;
+}
+.well .form-group{
+   margin-bottom: 10px;
+}
+.well .form-group label{
+   color: #9C9E9F;
+   font-weight: normal;
+   font-size: 17px;
+}
+.well .form-group .col-md-2,.well .form-group .col-md-10,.cite .form-group .col-md-8{
+   padding-left: 0;
+   padding-right: 0;
+}
+.well .form-control,.well .k-multiselect{
+   border-radius: 2px;
+}
+.well .k-multiselect .k-multiselect-wrap{
+    min-height: 34px;
+}
+.well .radio-uni{
+    margin-right: 10px;
+}
+.cubierta,.cubierta-video{
+    border: 1px solid #ccc;
+    background-color: #FFF;
+    border-radius: 3px;
+}
+.cubierta{
+     padding: 40px 35px 10px;
+}
+.cubierta-video{
+    padding: 40px;
+}
+.cubierta img{
+    max-width: 100%;
+    height: 50px;
+    margin-bottom: 15px;
+}
+.cubierta small{
+    display:block; 
+    color: #9C9E9F;
+}
+.box-image{
+    text-align: center;
+    margin: 22px auto;
+    /*width: 200px;*/
+ }
+.box-image-seccion{
+    text-align: center;
+}
+.box-image-borde{
+    width: 350px;
+    text-align: center;
+    margin: 22px auto;
+    border: 1px solid #ccc;
+    padding: 20px 35px;
+    border-radius: 4px;
+}
+.image-upload > input
+{
+ display: none !important;
+}
+/*****************Seccion unidad*******************/
+.input-seccion{
+    display:inline-block;
+    width: 97.3%;
+}
+.first-seccion{
+    margin: 18px;
+}
+.buttons-seccion{
+   text-align: right;
+}
+.buttons-seccion .ml-icon{
+    font-size: 15px;
+}
+.buttons-seccion .btn{
+    padding: 5px 8px;
+}
+.page-preview{
+   margin: 15px 0;
+}
+
+/*******************Acordeon *****************/
+.acordeon{
+    color: #9C9E9F;
+    padding: 25px;
+    margin: 20px 0;
+    border-width: 1px 1px 1px 7px;
+    border-style: solid;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-radius: 6px;
+    border-color: #F6F7FA;
+    background-color: #F6F7FA;
+    font-size: 16px;
+}
+.acordeon h4{
+  color: #9C9E9F;
+  font-weight: lighter;
+}
+.acordeon h5{
+    border-width: 0 0 0 5px;
+    border-left-color: #85b727;
+    border-style: solid;
+    color: #9C9E9F;
+    font-weight: lighter;
+    padding: 8px 15px;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+.acordeon p{
+    line-height: 22px;
+    padding-left: 20px;
+}
+.acordeon-blue {
+    border-left-color: #4EB1DF;
+}
+.acordeon-danger {
+    border-left-color: #ED5C8A;
+}
+.acordeon-image {
+    width: 68%;
+}
+.acordeon-image img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.box-pages{
+    margin-bottom: 35px;
+    padding: 15px 0;
+}
+
+/**********Formulario desabilitado Kendoui*****/
+.k-textbox[disabled],
+.k-textbox[readonly],
+fieldset[disabled] .k-textbox {
+  background-color: #eee;
+  opacity: 1;
+}
+.k-textbox[disabled],
+fieldset[disabled] .k-textbox {
+  cursor: not-allowed;
+}
+.k-textbox[disabled]:hover{
+    background-color: #eee;
+}
+
+/*+==========================Validacion======================*/
+.asterisk{
+    color: red;
+}
+.help-block{
+    font-size: 80%;
+    color: #a94442;
+    text-align: left;
+}
+.has-error.cubierta, .k-textbox.k-invalid, .form-control.k-invalid{
+    border-color: #a94442;
+}
+/*.has-success.cubierta, .k-textbox.k-valid, .form-control.k-valid{
+    border-color: #3c763d;
+}*/
+.form-control{
+  box-shadow: none !important;
+}
+.k-widget.k-tooltip-validation{
+    text-align: left;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background-color: #fff !important;
+    border-color:#fff !important;
+    box-shadow: none;
+    color: #a94442 !important;
+    font-size: 80%;
+    position: relative;
+    margin: 0.5em 0 0 0 !important;
+}
+.k-tooltip-validation .k-warning {
+    display: none;
+}
+.k-tooltip-validation .k-callout-n {
+    border-bottom-color: transparent !important;
+}
+
+
+
+
+.box-contenido .container .ml-section textarea{
+  display: none;
+}
+
+.box-contenido .container .ml-section div.editable {
+  height: 200px;
+  overflow: auto;
+}

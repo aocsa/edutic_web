@@ -1,0 +1,34 @@
+﻿<!-- Menu secundario-->
+<div class="ml-menu-secundario">
+    <ul class="nav nav-pills btn-sm col-md-9">
+        <li role="presentation"><a href="#/circle/{{idCircle}}/comments">Comentarios</a></li>
+        <li role="presentation"><a href="#/circle/{{idCircle}}/learningobjects">Unidades</a></li>
+        <li role="presentation" class="active"><a href="#/circle/{{idCircle}}/quizzes">Tareas</a></li>
+    </ul>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div id="ml_contenido" class="col-md-9 ml-tareas">
+            <div class="container-fluid">
+                <div class="col-md-4 col-sm-6" ng-repeat="quiz in quizzesByCircle">
+                    <div>
+                        <div class="ml-tarea-cuerpo">
+                            {{quiz.content}}
+                        </div>
+                        <!-- <span>{{quiz.title}}</span> -->
+                        <div class="ml-tarea-titulo">
+                            <p><span>Cuestionario</span> <i class="glyphicon glyphicon-ok"></i></p>
+                            <p><i>?</i> <span>15 preguntas<span></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comentarios y Actividades -->
+        <page-contact></page-contact>
+    </div>
+</div>
+

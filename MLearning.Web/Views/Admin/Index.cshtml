@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    ViewBag.VisibleMenus = "[{codigo: 0},{codigo: 1},{codigo: 2}]";
+    ViewBag.ActiveRole = "Super administrador";
+    ViewBag.menu = 0;
+ }
+
+<div class="content-box">
+    <div class="boxes">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box institutions pull-right">
+                        <div class="borde" ng-click="redireccionar('@Url.Action("Institutions","Admin")')">
+                            <img src="../../images/institucion-icon.png"> Instituciones
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box unidads">
+                        <div class="borde" ng-click="redireccionar('@Url.Action("LearningObjects", "Admin")')">
+                            <img src="../../images/unidades-icon.png"> Unidades
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>

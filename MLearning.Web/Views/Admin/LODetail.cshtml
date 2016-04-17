@@ -1,0 +1,68 @@
+﻿@model MLearning.Web.Models.lo_sections_pages
+
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "Contenidos Unidad";
+    ViewBag.VisibleMenus = "[{codigo: 0},{codigo: 1},{codigo: 2}]";
+    ViewBag.ActiveRole = "Super administrador";
+    ViewBag.menu = 2;
+
+}
+
+<div class="content-box">
+
+    <div class='nav-tab'>
+        <ul>
+            <li>Unidad</li>
+            <li>@Model.LearningObject.title</li>
+        </ul>
+    </div>
+
+    @if (ViewBag.pages != null)
+    {
+
+        <div class="acordeon acordeon-blue">
+            @foreach (var item in ViewBag.pages)
+            {
+                <div class="box-pages">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>@item.title</h5>
+                            <p>
+                                Descripción <br />
+                                @item.description
+                            </p>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="acordeon-image">
+                                @if (@item.url_img != " ")
+                                {
+                                    <img src="@item.url_img">
+                                }
+                                else
+                                {
+                                    <img id="coverImage" src="/images/029_icon_imagen.png" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    }
+    else
+    {
+        <div class="acordeon acordeon-blue">
+            <h4>No existen registros.</h4> 
+        </div>
+    }
+
+
+    <div class="row">
+        @Html.ActionLink("Regresar a unidades", "LearningObjects", "Admin", null, new { @class = "btn btn-blue pull-right" })
+    </div>
+</div>

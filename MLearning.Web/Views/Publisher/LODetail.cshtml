@@ -1,0 +1,55 @@
+﻿@model MLearningDB.LearningObject
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "LODetail";
+    ViewBag.VisibleMenus = "[{codigo: 7}]";
+    ViewBag.ActiveRole = "Profesor";
+    ViewBag.menu = 7;
+}
+
+<script>
+    var saveSectionURL = '@Url.Action("CreateLOsection", "Publisher")';
+    var viewPageURL = '@Url.Action("Index", "Page")';
+    var currentLO = @(Html.Raw(JsonConvert.SerializeObject(Model)));
+    var currentLOsections = @(Html.Raw(JsonConvert.SerializeObject(ViewBag.LOsections)));
+</script>
+
+
+<div class="content-box" ng-controller="seccionController">
+
+    <div class='nav-tab especial'>
+        <div class='row'>
+            <a href='@Url.Action("LearningObjects", new { id = ViewBag.idCircle })' class='btn btn-blue atras'>Regresar</a>
+        </div>
+        <div class="row">
+            <ul>
+                <li>Unidad</li>
+                <li>{{unidadActual.title}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="well">
+        <se-directive> </se-directive>
+        <!--div ng-show='unidadActual.pages' ng-repeat="page in unidadActual.pages">
+           <page-preview></page-preview>
+       </div-->
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-offset-8 pull-right footer-acciones">
+            <a ng-click="addSeccion({})" class="btn btn-info">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Nueva Sección
+            </a>
+
+            <!--a ng-click="nuevoExamen()" href="index.html#/Examen" class="btn btn-pink">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Nuevo Quiz
+            </a-->
+        </div>
+    </div>
+
+</div>

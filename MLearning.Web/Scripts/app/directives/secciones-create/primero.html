@@ -1,0 +1,47 @@
+<div class="well">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group" ng-class="{'has-error':pageForm.titulo.$invalid && !pageForm.$pristine, 'has-success':pageForm.titulo.$valid}">
+                <input name="titulo" ng-model="page.slide.lotitle" class="form-control" type="text" placeholder="T&iacute;tulo" required="required">
+            </div>
+            <div class="form-group" ng-class="{'has-error':pageForm.descripcion.$invalid && !pageForm.$pristine, 'has-success':pageForm.descripcion.$valid}">
+                <textarea class="form-control" name="descripcion"
+                          ng-model="page.slide.loparagraph" type="text"
+                          placeholder="Texto" rows="5" required="required"></textarea>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="box-image-seccion">
+                <div class="cubierta" ng-class="{'has-error':pageForm.urlImageIn.$invalid && !pageForm.$pristine , 'has-success':pageForm.urlImageIn.$valid}">
+
+                    <input id="urlImageIn" name="urlImageIn" ng-model="page.slide.loimage" type="hidden" required="required" />
+                    <img id="coverImage" src="/images/029_icon_imagen.png" ng-src="{{ page.slide.loimage }}" />
+                    <small>Imagen obligatoria</small>
+
+                    <input name="files1{{$index}}"
+                           id="file1{{$index}}"
+                           data-index="{{$index}}"
+                           type="file"
+                           kendo-upload
+                           k-async="{ saveUrl: '/Resources/UploadImage', autoUpload: true }"
+                           k-multiple="false"
+                           k-show-file-list="false"
+                           k-success="onUploadSlideImageSuccess" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <a href="" ng-click="pages.splice($index,1); ">
+                <span class="glyphicon  glyphicon-remove" aria-hidden="true"></span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,46 @@
+﻿@model MLearning.Core.Entities.Page
+
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "PageDetail";
+    ViewBag.VisibleMenus = "[{codigo: 7},{codigo: 8},{codigo: 9}]";
+    ViewBag.ActiveRole = "Profesor";
+    ViewBag.menu = 9;
+}
+
+<script>var saveImageURL = '@Url.Action("UploadImage", "Resources")';</script>
+
+
+@section Scripts
+{
+<script>
+    var savePageURL = '@Url.Action("SavePage", "Page")';
+    var currentLOSection = @(Html.Raw(JsonConvert.SerializeObject(ViewBag.currentLOsection)));
+    var currentLO = @(Html.Raw(JsonConvert.SerializeObject(ViewBag.currentLO)));
+    var currentPage = @(Html.Raw(JsonConvert.SerializeObject(Model)));
+    //var currentPageTag = @Html.Raw(JsonConvert.SerializeObject(ViewBag.pageTag));
+    var create = true;
+</script>
+
+<!--script src="@Url.Content("~/Scripts/app/pagina/paginaService.js")"></script-->
+<!--script src="@Url.Content("~/Scripts/app/pagina/paginaController.js")"></script-->
+
+}
+
+<div class="content-box" ng-controller="paginaController">
+
+    <div class="nav-tab">
+        <ul>
+            <li>Unidad</li>
+            <li>{{unidadActual.title}}</li>
+            <li>{{seccionActual.name}}</li>
+        </ul>
+    </div>
+
+    <form name="pageForm">
+      
+        <pg-editor></pg-editor>
+
+    </form>
+</div>
