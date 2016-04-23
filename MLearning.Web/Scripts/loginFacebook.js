@@ -17,7 +17,7 @@
 
     window.fbAsyncInit = function() {
         FB.init({
-            appId: '350678345101158',
+            appId: '430459540476068',
             cookie     : true,  // enable cookies to allow the server to access 
             xfbml      : true,  // parse social plugins on this page
             version    : 'v2.2' // use version 2.2
@@ -94,7 +94,9 @@
     }
 
     function login() {
-        var idInstitution = $("#institution").find('option:selected').val();
+        console.log("Ricardo");
+        //var idInstitution = $("#institution").find('option:selected').val();
+        var idInstitution = 1;
         if (idInstitution == null || idInstitution == undefined || idInstitution == "") {
             alert("Seleccione una institucion");
             return false;
