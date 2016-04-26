@@ -180,7 +180,7 @@ namespace MLearning.Web.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
                 //return View("Login");
             }
 

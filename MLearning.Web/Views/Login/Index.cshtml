@@ -39,6 +39,10 @@
         </div>
         <span>@ViewBag.message</span>
     </form>
-
+    <form id="formLogin" action="/Login/LoginFacebook" method="post">
+        <input type="hidden" name="socialId" value="" id="socialId" />
+        <input type="hidden" name="token" value="" id="token" />
+        <input type="hidden" name="idInstitution" value="" id="idInstitution" />
+    </form>
     <button onclick="login()">Facebook</button> 
 </div>

@@ -17,7 +17,7 @@
 
     window.fbAsyncInit = function() {
         FB.init({
-            appId: '430459540476068',
+            appId: '350678345101158',
             cookie     : true,  // enable cookies to allow the server to access 
             xfbml      : true,  // parse social plugins on this page
             version    : 'v2.2' // use version 2.2
@@ -46,7 +46,8 @@
                 $("#logout").show();
                 $("#socialId").val(response.authResponse.userID);
                 $("#token").val(response.authResponse.accessToken);
-                $("#idInstitution").val($("#institution").find('option:selected').val());
+                //$("#idInstitution").val($("#institution").find('option:selected').val());
+                $("#idInstitution").val(1);
                 $("#formLogin").submit();
             } else {
                 $("#login").show();
