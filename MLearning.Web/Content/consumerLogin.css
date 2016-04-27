@@ -494,5 +494,14 @@ html.ml-parent {
     color: #423F40;
     border-radius: 7px;
     color: #000; }
+  html.ml-parent .btn-fb {
+    padding: 12px 11px 10px 0px !important;
+    background: #1453b3;
+    margin-right: 10px; }
+    html.ml-parent .btn-fb i {
+      padding: 12px;
+      background: #005BE4;
+      border-right: 2px solid #18407d;
+      margin-right: 6px; }
 
 /*# sourceMappingURL=consumerLogin.css.map */
