@@ -147,6 +147,9 @@ namespace MLearning.Web.Controllers
                 MLearningDBResult.User user2 = new MLearningDBResult.User();
                 user2.username = user.username;
                 user2.password = user.password;
+
+                //  Registramos por defecto a un usuario en el curso o circulo 38
+                await _mLearningService.AddUserToCircle(UserID, 38);
                 SignIn(false, user2, userType ?? default(UserType));
 
                 return redirectToRoleHome();
@@ -161,14 +164,12 @@ namespace MLearning.Web.Controllers
         public async Task<ActionResult> LoginFacebook(string socialId, string token, int idInstitution)
         {
             socialId = "";
-
             /*
             MobileServiceUser user = new MobileServiceUser();
             user.UserId = socialId;
             user.MobileServiceAuthenticationToken = token;
             */
             // string json = @"{'access_token':" + token + "}";
-            
             JObject access_token = new JObject();
             access_token["access_token"] = token;
             try
@@ -187,7 +188,6 @@ namespace MLearning.Web.Controllers
             int userId = await _mLearningService.TryCreateUser(socialId, idInstitution);
             //_mLearningService.RegisterUserToInstitution(userId, InstitutionID);
             MLearningDBResult.User user = await _mLearningService.GetObjectWithId<MLearningDBResult.User>(userId);
-
             if (user != null)
             {
                 UserID = userId;
@@ -196,11 +196,17 @@ namespace MLearning.Web.Controllers
                     InstitutionID = consumer.institution_id;
                 Password = user.password;
                 userType = (UserType) user.type;
+
+                //  Registramos por defecto a un usuario en el curso o circulo 38
+                try{
+                    await _mLearningService.AddUserToCircle(UserID, 38);
+                }
+                catch (Exception e){
+                    SignIn(false, user, userType ?? default(UserType));
+                }
                 //Session Code HERE
                 SignIn(false, user, userType ?? default(UserType));
-
                 return redirectToRoleHome();
-
             }
             else
             {
